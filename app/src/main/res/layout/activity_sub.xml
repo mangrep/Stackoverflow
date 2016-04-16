@@ -1,8 +1,8 @@
-<materialtest.vivz.slidenerd.views.LayoutCustom xmlns:android="http://schemas.android.com/apk/res/android"
+<in.co.techm.views.LayoutCustom xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="materialtest.vivz.slidenerd.activities.ActivityTouchEvent">
+    tools:context="in.co.techm.activities.ActivityTouchEvent">
 
 
     <RelativeLayout
@@ -18,7 +18,7 @@
 
 
 
-    <materialtest.vivz.slidenerd.views.ViewCustom
+    <in.co.techm.views.ViewCustom
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -28,4 +28,4 @@
         android:textColor="@android:color/black" />
 
 
-</materialtest.vivz.slidenerd.views.LayoutCustom>
+</in.co.techm.views.LayoutCustom>

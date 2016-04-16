@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="materialtest.vivz.slidenerd.fragments.FragmentUpcoming">
+    tools:context="in.co.techm.fragments.FragmentUpcoming">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listMovieUpcoming"
