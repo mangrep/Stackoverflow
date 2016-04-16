@@ -47,17 +47,6 @@
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <activity
-            android:name="in.co.techm.activities.ActivityDynamicTabs"
-            android:label="@string/title_activity_dynamic_tabs" >
-        </activity>
-        <activity
-            android:name="in.co.techm.activities.ActivityRecylerAnimators"
-            android:label="@string/title_activity_recycler_item_animations" >
-        </activity>
-        <activity
-            android:name="in.co.techm.activities.ActivitySharedA"
-            android:label="@string/title_activity_activity_shared"></activity>
-        <activity
             android:name="in.co.techm.activities.ActivitySharedB"
             android:label="@string/title_activity_activity_shared_b"></activity>
     </application>

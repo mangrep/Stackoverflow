@@ -222,9 +222,9 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
 //        if (R.id.action_activity_calling == id) {
 //            startActivity(new Intent(this, dActivityA.class));
 //        }
-        if (R.id.action_shared_transitions == id) {
-            startActivity(new Intent(this, ActivitySharedA.class));
-        }
+//        if (R.id.action_shared_transitions == id) {
+//            startActivity(new Intent(this, ActivitySharedA.class));
+//        }
         if (R.id.action_tabs_using_library == id) {
             startActivity(new Intent(this, ActivitySlidingTabLayout.class));
         }
@@ -232,12 +232,12 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
             startActivity(new Intent(this, ActivityVectorDrawable.class));
         }
 
-        if (R.id.action_dynamic_tabs_activity == id) {
-            startActivity(new Intent(this, ActivityDynamicTabs.class));
-        }
-        if (R.id.action_recycler_item_animations == id) {
-            startActivity(new Intent(this, ActivityRecylerAnimators.class));
-        }
+//        if (R.id.action_dynamic_tabs_activity == id) {
+//            startActivity(new Intent(this, ActivityDynamicTabs.class));
+//        }
+//        if (R.id.action_recycler_item_animations == id) {
+//            startActivity(new Intent(this, ActivityRecylerAnimators.class));
+//        }
         return super.onOptionsItemSelected(item);
     }
 
