@@ -55,10 +55,6 @@
             android:label="@string/title_activity_recycler_item_animations" >
         </activity>
         <activity
-            android:name="in.co.techm.activities.ActivityA"
-            android:label="@string/title_activity_activity_calling" >
-        </activity>
-        <activity
             android:name="in.co.techm.activities.ActivityB"
             android:label="@string/title_activity_activity_called" >
         </activity>
