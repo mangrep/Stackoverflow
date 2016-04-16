@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,9 +23,6 @@ import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
-import it.neokree.materialtabs.MaterialTab;
-import it.neokree.materialtabs.MaterialTabHost;
-import it.neokree.materialtabs.MaterialTabListener;
 import in.co.techm.anim.AnimationUtils;
 import in.co.techm.extras.SortListener;
 import in.co.techm.fragments.FragmentBoxOffice;
@@ -35,11 +32,14 @@ import in.co.techm.fragments.FragmentUpcoming;
 import in.co.techm.logging.L;
 import in.co.techm.pharmeasy.R;
 import in.co.techm.services.ServiceMoviesBoxOffice;
+import it.neokree.materialtabs.MaterialTab;
+import it.neokree.materialtabs.MaterialTabHost;
+import it.neokree.materialtabs.MaterialTabListener;
 import me.tatarka.support.job.JobInfo;
 import me.tatarka.support.job.JobScheduler;
 
 
-public class ActivityMain extends ActionBarActivity implements MaterialTabListener, View.OnClickListener {
+public class ActivityMain extends AppCompatActivity implements MaterialTabListener, View.OnClickListener {
 
     //int representing our 0th tab corresponding to the Fragment where search results are dispalyed
     public static final int TAB_SEARCH_RESULTS = 0;
@@ -225,12 +225,12 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
 //        if (R.id.action_shared_transitions == id) {
 //            startActivity(new Intent(this, ActivitySharedA.class));
 //        }
-        if (R.id.action_tabs_using_library == id) {
-            startActivity(new Intent(this, ActivitySlidingTabLayout.class));
-        }
-        if (R.id.action_vector_test_activity == id) {
-            startActivity(new Intent(this, ActivityVectorDrawable.class));
-        }
+//        if (R.id.action_tabs_using_library == id) {
+//            startActivity(new Intent(this, ActivitySlidingTabLayout.class));
+//        }
+//        if (R.id.action_vector_test_activity == id) {
+//            startActivity(new Intent(this, ActivityVectorDrawable.class));
+//        }
 
 //        if (R.id.action_dynamic_tabs_activity == id) {
 //            startActivity(new Intent(this, ActivityDynamicTabs.class));
