@@ -1,46 +1,42 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="materialtest.vivz.slidenerd.activities.ActivityMain">
+    tools:context="in.co.techm.activities.ActivityMain">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_touch_intercept_activity"
-        android:icon="@drawable/ic_next"
-        android:orderInCategory="200"
-        android:title="@string/next"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_tabs_using_library"
-        android:orderInCategory="300"
-        android:title="@string/action_tabs_using_library"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_vector_test_activity"
-        android:orderInCategory="300"
-        android:title="@string/action_vector_test_activity"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_dynamic_tabs_activity"
-        android:orderInCategory="400"
-        android:title="@string/action_dynamic_tabs_activity"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_recycler_item_animations"
-        android:orderInCategory="500"
-        android:title="@string/action_recycler_item_animations"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_activity_calling"
-        android:orderInCategory="600"
-        android:title="@string/action_activity_calling"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_shared_transitions"
-        android:orderInCategory="600"
-        android:title="@string/action_shared_transitions"
-        app:showAsAction="never" />
+    <!--<item-->
+    <!--android:id="@+id/action_touch_intercept_activity"-->
+    <!--android:icon="@drawable/ic_next"-->
+    <!--android:orderInCategory="200"-->
+    <!--android:title="@string/next"-->
+    <!--app:showAsAction="never" />-->
+    <!--<item-->
+    <!--android:id="@+id/action_tabs_using_library"-->
+    <!--android:orderInCategory="300"-->
+    <!--android:title="@string/action_tabs_using_library"-->
+    <!--app:showAsAction="never" />-->
+    <!--<item-->
+    <!--android:id="@+id/action_vector_test_activity"-->
+    <!--android:orderInCategory="300"-->
+    <!--android:title="@string/action_vector_test_activity"-->
+    <!--app:showAsAction="never" />-->
+    <!--<item-->
+    <!--android:id="@+id/action_dynamic_tabs_activity"-->
+    <!--android:orderInCategory="400"-->
+    <!--android:title="@string/action_dynamic_tabs_activity"-->
+    <!--app:showAsAction="never" />-->
+    <!--<item-->
+    <!--android:id="@+id/action_recycler_item_animations"-->
+    <!--android:orderInCategory="500"-->
+    <!--android:title="@string/action_recycler_item_animations"-->
+    <!--app:showAsAction="never" />-->
+    <!-- -->
+    <!--<item-->
+    <!--android:id="@+id/action_shared_transitions"-->
+    <!--android:orderInCategory="600"-->
+    <!--android:title="@string/action_shared_transitions"-->
+    <!--app:showAsAction="never" />-->
 </menu>

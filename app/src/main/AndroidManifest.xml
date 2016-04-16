@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="materialtest.vivz.slidenerd.materialtest" >
+    package="in.co.techm.pharmeasy" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Always required on api < 21, needed to keep a wake lock while your job is running -->
@@ -11,13 +11,13 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:name=".MyApplication"
+        android:name="in.co.techm.pharmeasy.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="materialtest.vivz.slidenerd.activities.ActivityMain"
+            android:name="in.co.techm.activities.ActivityMain"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,49 +25,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="materialtest.vivz.slidenerd.activities.ActivityTouchEvent"
-            android:label="@string/title_activity_sub" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="materialtest.vivz.slidenerd.activities.ActivityMain" />
-        </activity>
-        <activity
-            android:name="materialtest.vivz.slidenerd.activities.ActivitySlidingTabLayout"
-            android:label="@string/title_activity_activity_using_tab_library" >
-        </activity>
-        <activity
-            android:name="materialtest.vivz.slidenerd.activities.ActivityVectorDrawable"
-            android:label="@string/title_activity_vector_test" >
-        </activity>
 
         <service
-            android:name="materialtest.vivz.slidenerd.services.ServiceMoviesBoxOffice"
+            android:name="in.co.techm.services.ServiceMoviesBoxOffice"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <activity
-            android:name="materialtest.vivz.slidenerd.activities.ActivityDynamicTabs"
-            android:label="@string/title_activity_dynamic_tabs" >
-        </activity>
-        <activity
-            android:name="materialtest.vivz.slidenerd.activities.ActivityRecylerAnimators"
-            android:label="@string/title_activity_recycler_item_animations" >
-        </activity>
-        <activity
-            android:name="materialtest.vivz.slidenerd.activities.ActivityA"
-            android:label="@string/title_activity_activity_calling" >
-        </activity>
-        <activity
-            android:name="materialtest.vivz.slidenerd.activities.ActivityB"
-            android:label="@string/title_activity_activity_called" >
-        </activity>
-        <activity
-            android:name="materialtest.vivz.slidenerd.activities.ActivitySharedA"
-            android:label="@string/title_activity_activity_shared"></activity>
-        <activity
-            android:name="materialtest.vivz.slidenerd.activities.ActivitySharedB"
-            android:label="@string/title_activity_activity_shared_b"></activity>
     </application>
 
 </manifest>
