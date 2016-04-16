@@ -13,11 +13,9 @@ import java.util.concurrent.TimeoutException;
 
 import in.co.techm.logging.L;
 
-/**
- * Created by Windows on 02-03-2015.
- */
+
 public class Requestor {
-    public static JSONObject requestMoviesJSON(RequestQueue requestQueue, String url) {
+    public static JSONObject requestQuestionsJSON(RequestQueue requestQueue, String url) {
         JSONObject response = null;
         RequestFuture<JSONObject> requestFuture = RequestFuture.newFuture();
 

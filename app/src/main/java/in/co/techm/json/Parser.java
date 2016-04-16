@@ -29,9 +29,7 @@ import static in.co.techm.extras.Keys.EndpointBoxOffice.KEY_THEATER;
 import static in.co.techm.extras.Keys.EndpointBoxOffice.KEY_THUMBNAIL;
 import static in.co.techm.extras.Keys.EndpointBoxOffice.KEY_TITLE;
 
-/**
- * Created by Windows on 02-03-2015.
- */
+
 public class Parser {
     public static ArrayList<Movie> parseMoviesJSON(JSONObject response) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
