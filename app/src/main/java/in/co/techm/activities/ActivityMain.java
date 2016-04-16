@@ -215,9 +215,9 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
             L.m("Settings selected");
             return true;
         }
-        if (id == R.id.action_touch_intercept_activity) {
-            startActivity(new Intent(this, ActivityTouchEvent.class));
-        }
+//        if (id == R.id.action_touch_intercept_activity) {
+//            startActivity(new Intent(this, ActivityTouchEvent.class));
+//        }
 
 //        if (R.id.action_activity_calling == id) {
 //            startActivity(new Intent(this, dActivityA.class));

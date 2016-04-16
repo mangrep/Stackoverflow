@@ -26,19 +26,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="in.co.techm.activities.ActivityTouchEvent"
-            android:label="@string/title_activity_sub" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="in.co.techm.activities.ActivityMain" />
-        </activity>
-        <activity
             android:name="in.co.techm.activities.ActivitySlidingTabLayout"
             android:label="@string/title_activity_activity_using_tab_library" >
-        </activity>
-        <activity
-            android:name="in.co.techm.activities.ActivityVectorDrawable"
-            android:label="@string/title_activity_vector_test" >
         </activity>
 
         <service
@@ -46,9 +35,6 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <activity
-            android:name="in.co.techm.activities.ActivitySharedB"
-            android:label="@string/title_activity_activity_shared_b"></activity>
     </application>
 
 </manifest>
