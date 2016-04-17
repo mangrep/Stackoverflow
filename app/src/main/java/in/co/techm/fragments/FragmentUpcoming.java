@@ -67,8 +67,8 @@ public class FragmentUpcoming extends Fragment implements SortListener, Upcoming
         return fragment;
     }
 
-    public void sortQuestionBYViewCount() {
-//        mSorter.sortQuestionBYViewCount(mListMovies);
+    public void sortByViewCount() {
+//        mSorter.sortByViewCount(mListMovies);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -79,8 +79,8 @@ public class FragmentUpcoming extends Fragment implements SortListener, Upcoming
     }
 
     @Override
-    public void onSortByRating() {
-//        mSorter.sortMoviesByRating(mListMovies);
+    public void onSortByVotes() {
+//        mSorter.sortQuestionByVotes(mListMovies);
         mAdapter.notifyDataSetChanged();
     }
 

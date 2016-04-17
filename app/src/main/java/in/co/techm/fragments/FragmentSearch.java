@@ -57,7 +57,7 @@ public class FragmentSearch extends Fragment implements SortListener{
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-    public void sortQuestionBYViewCount(){
+    public void sortByViewCount(){
         L.t(getActivity(), "sort name search");
     }
 
@@ -67,7 +67,7 @@ public class FragmentSearch extends Fragment implements SortListener{
     }
 
     @Override
-    public void onSortByRating() {
+    public void onSortByVotes() {
 
     }
 

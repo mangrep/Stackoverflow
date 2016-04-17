@@ -137,12 +137,12 @@ public class FragmentStackoverflowQuestion extends Fragment implements SortListe
      * Called when the user chooses to sort results by view count through the menu displayed inside FAB
      */
     @Override
-    public void sortQuestionBYViewCount() {
+    public void sortByViewCount() {
         if (mListQuestions != null) {
             mSorter.sortQuestionBYViewCount(mListQuestions);
             mAdapter.notifyDataSetChanged();
         } else {
-            Toast.makeText(getContext().getApplicationContext(), "No data avalilable to sort", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext().getApplicationContext(), "No data available to sort", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -152,17 +152,25 @@ public class FragmentStackoverflowQuestion extends Fragment implements SortListe
      */
     @Override
     public void onSortByCreationDate() {
-        mSorter.sortQuestionsByCreationDate(mListQuestions);
-        mAdapter.notifyDataSetChanged();
+        if (mListQuestions != null) {
+            mSorter.sortQuestionsByCreationDate(mListQuestions);
+            mAdapter.notifyDataSetChanged();
+        } else {
+            Toast.makeText(getContext().getApplicationContext(), "No data available to sort", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
      * Called when the user chooses to sort results by rating through the menu displayed inside FAB
      */
     @Override
-    public void onSortByRating() {
-//        mSorter.sortMoviesByRating(mQuestions);
-        mAdapter.notifyDataSetChanged();
+    public void onSortByVotes() {
+        if (mListQuestions != null) {
+            mSorter.sortQuestionByVotes(mListQuestions);
+            mAdapter.notifyDataSetChanged();
+        } else {
+            Toast.makeText(getContext().getApplicationContext(), "No data available to sort", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -171,7 +179,7 @@ public class FragmentStackoverflowQuestion extends Fragment implements SortListe
     @Override
     public void onQuestionsLoaded(ListQuestion listQuestion) {
         L.m("FragmentBoxOffice: onQuestionsLoaded Fragment");
-        //update the Adapter to contain the new movies downloaded from the web
+        //update the Adapter to contain the questions downloaded from the web
         if (mSwipeRefreshLayout.isRefreshing()) {
             mSwipeRefreshLayout.setRefreshing(false);
         }

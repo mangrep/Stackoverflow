@@ -174,9 +174,9 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
         SubActionButton buttonSortVotes = itemBuilder.setContentView(iconSortVotes).build();
 
         //to determine which button was clicked, set Tags on each button
-        buttonSortViewCount.setTag(TAG_SORT_CREATION_DATE);
-        buttonSortCreationDate.setTag(TAG_SORT_VOTES);
-        buttonSortVotes.setTag(TAG_SORT_VIEW_COUNT);
+        buttonSortViewCount.setTag(TAG_SORT_VIEW_COUNT);
+        buttonSortCreationDate.setTag(TAG_SORT_CREATION_DATE);
+        buttonSortVotes.setTag(TAG_SORT_VOTES);
 
         buttonSortViewCount.setOnClickListener(this);
         buttonSortCreationDate.setOnClickListener(this);
@@ -237,7 +237,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
 
             if (v.getTag().equals(TAG_SORT_CREATION_DATE)) {
                 //call the sort by view count method on any Fragment that implements sortlistener
-                ((SortListener) fragment).sortQuestionBYViewCount();
+                ((SortListener) fragment).sortByViewCount();
             }
             if (v.getTag().equals(TAG_SORT_VOTES)) {
                 //call the sort by creation date method on any Fragment that implements sortlistener
@@ -245,7 +245,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
             }
             if (v.getTag().equals(TAG_SORT_VIEW_COUNT)) {
                 //call the sort by ratings method on any Fragment that implements sortlistener
-                ((SortListener) fragment).onSortByRating();
+                ((SortListener) fragment).onSortByVotes();
             }
         }
 

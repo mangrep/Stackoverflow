@@ -1,12 +1,10 @@
 package in.co.techm.extras;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
-import in.co.techm.pojo.Movie;
 import in.co.techm.pojo.response.ListQuestion;
 import in.co.techm.pojo.response.Question;
 
@@ -43,15 +41,15 @@ public class QuestionSorter {
         });
     }
 
-    public void sortMoviesByRating(ArrayList<Movie> movies) {
-        Collections.sort(movies, new Comparator<Movie>() {
+    public void sortQuestionByVotes(ListQuestion questions) {
+        Collections.sort(Arrays.asList(questions.getItems()), new Comparator<Question>() {
             @Override
-            public int compare(Movie lhs, Movie rhs) {
-                int ratingLhs = lhs.getAudienceScore();
-                int ratingRhs = rhs.getAudienceScore();
-                if (ratingLhs < ratingRhs) {
+            public int compare(Question lhs, Question rhs) {
+                int soreLhs = lhs.getScore();
+                int soreRhs = rhs.getScore();
+                if (soreLhs < soreRhs) {
                     return 1;
-                } else if (ratingLhs > ratingRhs) {
+                } else if (soreLhs > soreRhs) {
                     return -1;
                 } else {
                     return 0;
