@@ -29,14 +29,16 @@ public class AdapterQuestions extends RecyclerView.Adapter<AdapterQuestions.View
     private LayoutInflater mInflater;
     private VolleySingleton mVolleySingleton;
     private ImageLoader mImageLoader;
+    private boolean mShowLikeButton;
     //formatter for parsing the dates in the specified format below
     private DateFormat mFormatter = new SimpleDateFormat("yyyy-MM-dd");
     //keep track of the previous position for animations where scrolling down requires a different animation compared to scrolling up
     private int mPreviousPosition = 0;
 
 
-    public AdapterQuestions(Context context) {
+    public AdapterQuestions(Context context, boolean showLike) {
         mInflater = LayoutInflater.from(context);
+        mShowLikeButton = showLike;
         mVolleySingleton = VolleySingleton.getInstance();
         mImageLoader = mVolleySingleton.getImageLoader();
     }
@@ -60,6 +62,11 @@ public class AdapterQuestions extends RecyclerView.Adapter<AdapterQuestions.View
         holder.questionTxt.setText(question.getTitle());
         holder.name.setText(question.getOwner().getDisplay_name());
         holder.tags.setText(Arrays.toString(question.getTags()));//TODO remove braces
+        if (mShowLikeButton) {
+            holder.likeThumbnail.setVisibility(View.VISIBLE);
+        } else {
+            holder.likeThumbnail.setVisibility(View.GONE);
+        }
 
         Date creationDate = new Date(question.getCreation_date());
         Date now = new Date();
@@ -118,6 +125,7 @@ public class AdapterQuestions extends RecyclerView.Adapter<AdapterQuestions.View
         TextView tags;
         TextView name;
         TextView time;
+        ImageView likeThumbnail;
 
         public ViewHolderQuestions(View itemView) {
             super(itemView);
@@ -126,6 +134,7 @@ public class AdapterQuestions extends RecyclerView.Adapter<AdapterQuestions.View
             tags = (TextView) itemView.findViewById(R.id.tags);
             name = (TextView) itemView.findViewById(R.id.name);
             time = (TextView) itemView.findViewById(R.id.time);
+            likeThumbnail = (ImageView) itemView.findViewById(R.id.likeThumbnail);
         }
     }
 }

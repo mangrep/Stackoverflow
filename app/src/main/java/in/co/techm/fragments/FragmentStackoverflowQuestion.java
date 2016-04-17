@@ -78,12 +78,12 @@ public class FragmentStackoverflowQuestion extends Fragment implements SortListe
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_stackoverflow_questions, container, false);
         mTextError = (TextView) layout.findViewById(R.id.textVolleyError);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) layout.findViewById(R.id.swipeMovieHits);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) layout.findViewById(R.id.swipeQuestion);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        mRecyclerQuestions = (RecyclerView) layout.findViewById(R.id.listMovieHits);
+        mRecyclerQuestions = (RecyclerView) layout.findViewById(R.id.listQuestionList);
         //set the layout manager before trying to display data
         mRecyclerQuestions.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new AdapterQuestions(getActivity());
+        mAdapter = new AdapterQuestions(getActivity(), false);
         mRecyclerQuestions.setAdapter(mAdapter);
 
         if (savedInstanceState != null) {

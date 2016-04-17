@@ -1,5 +1,7 @@
 package in.co.techm.extras;
 
+import android.util.Log;
+
 import com.android.volley.RequestQueue;
 
 import org.json.JSONObject;
@@ -17,8 +19,10 @@ public class QuestionUtils {
         return listQuestion;
     }
 
-    public static ListQuestion loadUpcomingMovies(RequestQueue requestQueue) {
-        JSONObject response = Requestor.requestQuestionsJSON(requestQueue, Endpoints.getRequestUrlUpcomingMovies(30));
+    public static ListQuestion searchQuestion(RequestQueue requestQueue, String tag) {
+//        JSONObject response = Requestor.requestQuestionsJSON(requestQueue, Endpoints.searchQuestions(tag));
+        Log.d("Search URL", Endpoints.searchQuestions(tag));
+        JSONObject response = Requestor.requestQuestionsJSON(requestQueue, Endpoints.getRequestUrlListQuestions(30));
         ListQuestion listQuestion = Parser.parseJSON(response);
 //        MyApplication.getWritableDatabase().insertQuestions(DBQuestions.UPCOMING, questions, true);
         return listQuestion;

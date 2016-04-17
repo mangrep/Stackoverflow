@@ -5,12 +5,12 @@
     tools:context="in.co.techm.fragments.FragmentStackoverflowQuestion">
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeMovieHits"
+        android:id="@+id/swipeQuestion"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <!-- TODO: Update blank fragment layout -->
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/listMovieHits"
+            android:id="@+id/listQuestionList"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </android.support.v4.widget.SwipeRefreshLayout>
