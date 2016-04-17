@@ -30,10 +30,10 @@ import in.co.techm.pojo.response.ListQuestion;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FragmentUpcoming#newInstance} factory method to
+ * Use the {@link FragmentLikes#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentUpcoming extends Fragment implements SortListener, UpcomingMoviesLoadedListener {
+public class FragmentLikes extends Fragment implements SortListener, UpcomingMoviesLoadedListener {
     //The key used to store arraylist of movie objects to and from parcelable
     private static final String STATE_MOVIES = "state_movies";
     //the arraylist containing our list of box office his
@@ -47,7 +47,7 @@ public class FragmentUpcoming extends Fragment implements SortListener, Upcoming
     //the sorter responsible for sorting our movie results based on choice made by the user in the FAB
     private QuestionSorter mSorter = new QuestionSorter();
 
-    public FragmentUpcoming() {
+    public FragmentLikes() {
         // Required empty public constructor
     }
 
@@ -60,8 +60,8 @@ public class FragmentUpcoming extends Fragment implements SortListener, Upcoming
      * @return A new instance of fragment FragmentUpcoming.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentUpcoming newInstance(String param1, String param2) {
-        FragmentUpcoming fragment = new FragmentUpcoming();
+    public static FragmentLikes newInstance(String param1, String param2) {
+        FragmentLikes fragment = new FragmentLikes();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;

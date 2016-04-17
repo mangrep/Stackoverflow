@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="drawer_tabs">
-        <item>Search</item>
-        <item>Hits</item>
-        <item>Upcoming</item>
+        <item>Home</item>
+        <item>Likes</item>
     </string-array>
 </resources>

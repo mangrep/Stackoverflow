@@ -1,8 +1,6 @@
 package in.co.techm.activities;
 
 
-import android.content.ComponentName;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -23,16 +21,14 @@ import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 import in.co.techm.extras.SortListener;
-import in.co.techm.fragments.FragmentStackoverflowQuestion;
 import in.co.techm.fragments.FragmentDrawer;
-import in.co.techm.fragments.FragmentUpcoming;
+import in.co.techm.fragments.FragmentLikes;
+import in.co.techm.fragments.FragmentStackoverflowQuestion;
 import in.co.techm.logging.L;
 import in.co.techm.pharmeasy.R;
-import in.co.techm.services.ServiceMoviesBoxOffice;
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
-import me.tatarka.support.job.JobInfo;
 import me.tatarka.support.job.JobScheduler;
 
 
@@ -72,7 +68,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
         setContentView(R.layout.activity_main);
         setupFAB();
         setupTabs();
-        setupJob();
+//        setupJob();
         setupDrawer();
         //animate the Toolbar when it comes into the picture
 //        AnimationUtils.animateToolbarDroppingDown(mContainerToolbar);
@@ -117,7 +113,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
         for (int i = 0; i < mAdapter.getCount(); i++) {
             mTabHost.addTab(
                     mTabHost.newTab()
-                            .setIcon(mAdapter.getIcon(i))
+                            .setText(mAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
     }
@@ -129,20 +125,20 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
             @Override
             public void run() {
                 //schedule the job after the delay has been elapsed
-                buildJob();
+//                buildJob();
             }
         }, 30000);
     }
 
-    private void buildJob() {
-        //attach the job ID and the name of the Service that will work in the background
-        JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, new ComponentName(this, ServiceMoviesBoxOffice.class));
-        //set periodic polling that needs net connection and works across device reboots
-        builder.setPeriodic(POLL_FREQUENCY)
-                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
-                .setPersisted(true);
-        mJobScheduler.schedule(builder.build());
-    }
+//    private void buildJob() {
+//        //attach the job ID and the name of the Service that will work in the background
+//        JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, new ComponentName(this, ServiceMoviesBoxOffice.class));
+//        //set periodic polling that needs net connection and works across device reboots
+//        builder.setPeriodic(POLL_FREQUENCY)
+//                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+//                .setPersisted(true);
+//        mJobScheduler.schedule(builder.build());
+//    }
 
     private void setupFAB() {
         //define the icon for the main floating action button
@@ -267,10 +263,6 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-        int icons[] = {R.drawable.ic_action_search,
-                R.drawable.ic_action_trending,
-                R.drawable.ic_action_upcoming};
-
         FragmentManager fragmentManager;
 
         public ViewPagerAdapter(FragmentManager fm) {
@@ -286,7 +278,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
                     fragment = FragmentStackoverflowQuestion.newInstance("", "");
                     break;
                 case TAB_LIKES:
-                    fragment = FragmentUpcoming.newInstance("", "");
+                    fragment = FragmentLikes.newInstance("", "");
                     break;
             }
             return fragment;
@@ -300,11 +292,8 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return getResources().getStringArray(R.array.tabs)[position];
+            return getResources().getStringArray(R.array.drawer_tabs)[position];
         }
 
-        private Drawable getIcon(int position) {
-            return getResources().getDrawable(icons[position]);
-        }
     }
 } 

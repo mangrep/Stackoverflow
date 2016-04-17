@@ -14,9 +14,6 @@ import java.util.List;
 import in.co.techm.pharmeasy.R;
 import in.co.techm.pojo.Information;
 
-/**
- * Created by Windows on 22-12-2014.
- */
 public class AdapterDrawer extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<Information> data= Collections.emptyList();
     private static final int TYPE_HEADER=0;
