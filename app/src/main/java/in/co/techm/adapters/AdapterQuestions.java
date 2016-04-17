@@ -13,6 +13,7 @@ import com.android.volley.toolbox.ImageLoader;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import in.co.techm.anim.AnimationUtils;
@@ -48,7 +49,7 @@ public class AdapterQuestions extends RecyclerView.Adapter<AdapterQuestions.View
 
     @Override
     public ViewHolderQuestions onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.custom_movie_box_office, parent, false);
+        View view = mInflater.inflate(R.layout.custom_stackoverflow_question, parent, false);
         ViewHolderQuestions viewHolder = new ViewHolderQuestions(view);
         return viewHolder;
     }
@@ -56,13 +57,10 @@ public class AdapterQuestions extends RecyclerView.Adapter<AdapterQuestions.View
     @Override
     public void onBindViewHolder(ViewHolderQuestions holder, int position) {
         Question question = mListQuestions.getItems()[position];
-        //one or more fields of the Movie object may be null since they are fetched from the web
         holder.questionTxt.setText(question.getTitle());
         holder.name.setText(question.getOwner().getDisplay_name());
-        holder.tags.setText(question.getTags().toString());
+        holder.tags.setText(Arrays.toString(question.getTags()));//TODO remove braces
 
-
-        //retrieved date may be null
         Date creationDate = new Date(question.getCreation_date());
         Date now = new Date();
 
@@ -72,18 +70,12 @@ public class AdapterQuestions extends RecyclerView.Adapter<AdapterQuestions.View
         long diffMinutes = diff / (60 * 1000) % 60;
         long diffHours = diff / (60 * 60 * 1000) % 24;
         long diffDays = diff / (24 * 60 * 60 * 1000);
-        holder.time.setText(diffMinutes + " minutes back");
+        holder.time.setText(diffMinutes + " minutes back");//TODO set proper value
 
         if (position > mPreviousPosition) {
             AnimationUtils.animateSunblind(holder, true);
-//            AnimationUtils.animateSunblind(holder, true);
-//            AnimationUtils.animate1(holder, true);
-//            AnimationUtils.animate(holder,true);
         } else {
             AnimationUtils.animateSunblind(holder, false);
-//            AnimationUtils.animateSunblind(holder, false);
-//            AnimationUtils.animate1(holder, false);
-//            AnimationUtils.animate(holder, false);
         }
         mPreviousPosition = position;
 
