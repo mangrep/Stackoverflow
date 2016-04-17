@@ -2,7 +2,6 @@ package in.co.techm.activities;
 
 
 import android.content.ComponentName;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,7 +26,6 @@ import in.co.techm.anim.AnimationUtils;
 import in.co.techm.extras.SortListener;
 import in.co.techm.fragments.FragmentBoxOffice;
 import in.co.techm.fragments.FragmentDrawer;
-import in.co.techm.fragments.FragmentSearch;
 import in.co.techm.fragments.FragmentUpcoming;
 import in.co.techm.logging.L;
 import in.co.techm.pharmeasy.R;
@@ -41,22 +39,21 @@ import me.tatarka.support.job.JobScheduler;
 
 public class ActivityMain extends AppCompatActivity implements MaterialTabListener, View.OnClickListener {
 
-    //int representing our 0th tab corresponding to the Fragment where search results are dispalyed
-    public static final int TAB_SEARCH_RESULTS = 0;
-    //int corresponding to our 1st tab corresponding to the Fragment where box office hits are dispalyed
-    public static final int TAB_HITS = 1;
-    //int corresponding to our 2nd tab corresponding to the Fragment where upcoming movies are displayed
-    public static final int TAB_UPCOMING = 2;
+    //tab containing list of questions
+    public static final int TAB_QUESTION_LIST = 0;
+    //tab to list likes
+    public static final int TAB_LIKES = 1;
+
     //int corresponding to the number of tabs in our Activity
-    public static final int TAB_COUNT = 3;
+    public static final int TAB_COUNT = 2;
     //int corresponding to the id of our JobSchedulerService
     private static final int JOB_ID = 100;
-    //tag associated with the FAB menu button that sorts by name
-    private static final String TAG_SORT_NAME = "sortName";
-    //tag associated with the FAB menu button that sorts by date
-    private static final String TAG_SORT_DATE = "sortDate";
-    //tag associated with the FAB menu button that sorts by ratings
-    private static final String TAG_SORT_RATINGS = "sortRatings";
+    //tag associated with the FAB menu button that sorts by creation date
+    private static final String TAG_SORT_CREATION_DATE = "sortCD";
+    //tag associated with the FAB menu button that sorts by votes
+    private static final String TAG_SORT_VOTES = "sortVotes";
+    //tag associated with the FAB menu button that sorts by ciew count
+    private static final String TAG_SORT_VIEW_COUNT = "sortViewCount";
     //Run the JobSchedulerService every 2 minutes
     private static final long POLL_FREQUENCY = 28800000;
     private JobScheduler mJobScheduler;
@@ -79,7 +76,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
         setupJob();
         setupDrawer();
         //animate the Toolbar when it comes into the picture
-        AnimationUtils.animateToolbarDroppingDown(mContainerToolbar);
+//        AnimationUtils.animateToolbarDroppingDown(mContainerToolbar);
 
     }
 
@@ -160,12 +157,12 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
                 .build();
 
         //define the icons for the sub action buttons
-        ImageView iconSortName = new ImageView(this);
-        iconSortName.setImageResource(R.drawable.ic_action_alphabets);
-        ImageView iconSortDate = new ImageView(this);
-        iconSortDate.setImageResource(R.drawable.ic_action_calendar);
-        ImageView iconSortRatings = new ImageView(this);
-        iconSortRatings.setImageResource(R.drawable.ic_action_important);
+        ImageView iconSortViewCount = new ImageView(this);
+        iconSortViewCount.setImageResource(R.drawable.ic_arrow_drop_up_24dp);
+        ImageView iconSortCreationDate = new ImageView(this);
+        iconSortCreationDate.setImageResource(R.drawable.ic_action_calendar);
+        ImageView iconSortVotes = new ImageView(this);
+        iconSortVotes.setImageResource(R.drawable.ic_action_important);
 
         //set the background for all the sub buttons
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
@@ -173,24 +170,24 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
 
 
         //build the sub buttons
-        SubActionButton buttonSortName = itemBuilder.setContentView(iconSortName).build();
-        SubActionButton buttonSortDate = itemBuilder.setContentView(iconSortDate).build();
-        SubActionButton buttonSortRatings = itemBuilder.setContentView(iconSortRatings).build();
+        SubActionButton buttonSortViewCount = itemBuilder.setContentView(iconSortViewCount).build();
+        SubActionButton buttonSortCreationDate = itemBuilder.setContentView(iconSortCreationDate).build();
+        SubActionButton buttonSortVotes = itemBuilder.setContentView(iconSortVotes).build();
 
         //to determine which button was clicked, set Tags on each button
-        buttonSortName.setTag(TAG_SORT_NAME);
-        buttonSortDate.setTag(TAG_SORT_DATE);
-        buttonSortRatings.setTag(TAG_SORT_RATINGS);
+        buttonSortViewCount.setTag(TAG_SORT_CREATION_DATE);
+        buttonSortCreationDate.setTag(TAG_SORT_VOTES);
+        buttonSortVotes.setTag(TAG_SORT_VIEW_COUNT);
 
-        buttonSortName.setOnClickListener(this);
-        buttonSortDate.setOnClickListener(this);
-        buttonSortRatings.setOnClickListener(this);
+        buttonSortViewCount.setOnClickListener(this);
+        buttonSortCreationDate.setOnClickListener(this);
+        buttonSortVotes.setOnClickListener(this);
 
         //add the sub buttons to the main floating action button
         mFABMenu = new FloatingActionMenu.Builder(this)
-                .addSubActionView(buttonSortName)
-                .addSubActionView(buttonSortDate)
-                .addSubActionView(buttonSortRatings)
+                .addSubActionView(buttonSortCreationDate)
+                .addSubActionView(buttonSortVotes)
+                .addSubActionView(buttonSortViewCount)
                 .attachTo(mFAB)
                 .build();
     }
@@ -215,29 +212,6 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
             L.m("Settings selected");
             return true;
         }
-//        if (id == R.id.action_touch_intercept_activity) {
-//            startActivity(new Intent(this, ActivityTouchEvent.class));
-//        }
-
-//        if (R.id.action_activity_calling == id) {
-//            startActivity(new Intent(this, dActivityA.class));
-//        }
-//        if (R.id.action_shared_transitions == id) {
-//            startActivity(new Intent(this, ActivitySharedA.class));
-//        }
-//        if (R.id.action_tabs_using_library == id) {
-//            startActivity(new Intent(this, ActivitySlidingTabLayout.class));
-//        }
-//        if (R.id.action_vector_test_activity == id) {
-//            startActivity(new Intent(this, ActivityVectorDrawable.class));
-//        }
-
-//        if (R.id.action_dynamic_tabs_activity == id) {
-//            startActivity(new Intent(this, ActivityDynamicTabs.class));
-//        }
-//        if (R.id.action_recycler_item_animations == id) {
-//            startActivity(new Intent(this, ActivityRecylerAnimators.class));
-//        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -262,15 +236,15 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
         Fragment fragment = (Fragment) mAdapter.instantiateItem(mPager, mPager.getCurrentItem());
         if (fragment instanceof SortListener) {
 
-            if (v.getTag().equals(TAG_SORT_NAME)) {
+            if (v.getTag().equals(TAG_SORT_CREATION_DATE)) {
                 //call the sort by name method on any Fragment that implements sortlistener
                 ((SortListener) fragment).onSortByName();
             }
-            if (v.getTag().equals(TAG_SORT_DATE)) {
+            if (v.getTag().equals(TAG_SORT_VOTES)) {
                 //call the sort by date method on any Fragment that implements sortlistener
                 ((SortListener) fragment).onSortByDate();
             }
-            if (v.getTag().equals(TAG_SORT_RATINGS)) {
+            if (v.getTag().equals(TAG_SORT_VIEW_COUNT)) {
                 //call the sort by ratings method on any Fragment that implements sortlistener
                 ((SortListener) fragment).onSortByRating();
             }
@@ -309,13 +283,10 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
             Fragment fragment = null;
 //            L.m("getItem called for " + num);
             switch (num) {
-                case TAB_SEARCH_RESULTS:
-                    fragment = FragmentSearch.newInstance("", "");
-                    break;
-                case TAB_HITS:
+                case TAB_QUESTION_LIST:
                     fragment = FragmentBoxOffice.newInstance("", "");
                     break;
-                case TAB_UPCOMING:
+                case TAB_LIKES:
                     fragment = FragmentUpcoming.newInstance("", "");
                     break;
             }
