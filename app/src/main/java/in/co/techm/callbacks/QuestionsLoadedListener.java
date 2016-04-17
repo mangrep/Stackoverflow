@@ -1,8 +1,8 @@
 package in.co.techm.callbacks;
 
-import in.co.techm.pojo.response.Questions;
+import in.co.techm.pojo.response.ListQuestion;
 
 
 public interface QuestionsLoadedListener {
-    public void onQuestionsLoaded(Questions listMovies);
+    public void onQuestionsLoaded(ListQuestion listQuestion);
 }

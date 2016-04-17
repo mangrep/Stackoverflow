@@ -7,10 +7,10 @@ import com.android.volley.RequestQueue;
 import in.co.techm.callbacks.QuestionsLoadedListener;
 import in.co.techm.extras.QuestionUtils;
 import in.co.techm.network.VolleySingleton;
-import in.co.techm.pojo.response.Questions;
+import in.co.techm.pojo.response.ListQuestion;
 
 
-public class TaskLoadQuestions extends AsyncTask<Void, Void, Questions> {
+public class TaskLoadQuestions extends AsyncTask<Void, Void, ListQuestion> {
     private QuestionsLoadedListener myComponent;
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue;
@@ -25,16 +25,16 @@ public class TaskLoadQuestions extends AsyncTask<Void, Void, Questions> {
 
 
     @Override
-    protected Questions doInBackground(Void... params) {
+    protected ListQuestion doInBackground(Void... params) {
 
-        Questions questions = QuestionUtils.loadStackoverflowQuestions(requestQueue);
-        return questions;
+        ListQuestion listQuestion = QuestionUtils.loadStackoverflowQuestions(requestQueue);
+        return listQuestion;
     }
 
     @Override
-    protected void onPostExecute(Questions questions) {
+    protected void onPostExecute(ListQuestion listQuestion) {
         if (myComponent != null) {
-            myComponent.onQuestionsLoaded(questions);
+            myComponent.onQuestionsLoaded(listQuestion);
         }
     }
 

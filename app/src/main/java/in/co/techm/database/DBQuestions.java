@@ -12,7 +12,7 @@ import java.util.Date;
 
 import in.co.techm.logging.L;
 import in.co.techm.pojo.Movie;
-import in.co.techm.pojo.response.Questions;
+import in.co.techm.pojo.response.Question;
 
 /**
  * Created by Windows on 25-02-2015.
@@ -28,7 +28,7 @@ public class DBQuestions {
         mDatabase = mHelper.getWritableDatabase();
     }
 
-    public void insertQuestions(int table, Questions questions, boolean clearPrevious) {
+    public void insertQuestions(int table, Question question, boolean clearPrevious) {
         if (clearPrevious) {
             deleteQuestions(table);
         }

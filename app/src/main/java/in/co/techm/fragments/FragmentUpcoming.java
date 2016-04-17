@@ -22,14 +22,11 @@ import java.util.ArrayList;
 
 import in.co.techm.adapters.AdapterMovies;
 import in.co.techm.callbacks.UpcomingMoviesLoadedListener;
-import in.co.techm.database.DBQuestions;
 import in.co.techm.extras.MovieSorter;
 import in.co.techm.extras.SortListener;
-import in.co.techm.logging.L;
-import in.co.techm.pharmeasy.MyApplication;
 import in.co.techm.pharmeasy.R;
 import in.co.techm.pojo.Movie;
-import in.co.techm.task.TaskLoadUpcomingMovies;
+import in.co.techm.pojo.response.ListQuestion;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,7 +37,7 @@ public class FragmentUpcoming extends Fragment implements SortListener, Upcoming
     //The key used to store arraylist of movie objects to and from parcelable
     private static final String STATE_MOVIES = "state_movies";
     //the arraylist containing our list of box office his
-    private ArrayList<Movie> mListMovies = new ArrayList<>();
+    private ListQuestion mListMovies ;
     //the adapter responsible for displaying our movies within a RecyclerView
     private AdapterMovies mAdapter;
     //the recyclerview containing showing all our movies
@@ -71,19 +68,19 @@ public class FragmentUpcoming extends Fragment implements SortListener, Upcoming
     }
 
     public void onSortByName() {
-        mSorter.sortMoviesByName(mListMovies);
+//        mSorter.sortMoviesByName(mListMovies);
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onSortByDate() {
-        mSorter.sortMoviesByDate(mListMovies);
+//        mSorter.sortMoviesByDate(mListMovies);
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onSortByRating() {
-        mSorter.sortMoviesByRating(mListMovies);
+//        mSorter.sortMoviesByRating(mListMovies);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -101,18 +98,18 @@ public class FragmentUpcoming extends Fragment implements SortListener, Upcoming
 
         if (savedInstanceState != null) {
             //if this fragment starts after a rotation or configuration change, load the existing movies from a parcelable
-            mListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
+//            mListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
         } else {
             //if this fragment starts for the first time, load the list of movies from a database
-            mListMovies = MyApplication.getWritableDatabase().readMovies(DBQuestions.UPCOMING);
+//            mListMovies = MyApplication.getWritableDatabase().readMovies(DBQuestions.UPCOMING);
             //if the database is empty, trigger an AsycnTask to download movie list from the web
-            if (mListMovies.isEmpty()) {
-                L.m("FragmentUpcoming: executing task from fragment");
-                new TaskLoadUpcomingMovies(this).execute();
-            }
+//            if (mListMovies.isEmpty()) {
+//                L.m("FragmentUpcoming: executing task from fragment");
+//                new TaskLoadUpcomingMovies(this).execute();
+//            }
         }
         //update your Adapter to containg the retrieved movies
-        mAdapter.setMovies(mListMovies);
+//        mAdapter.setQuestions(mListMovies);
         return layout;
     }
 
@@ -120,7 +117,7 @@ public class FragmentUpcoming extends Fragment implements SortListener, Upcoming
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         //save the movie list to a parcelable prior to rotation or configuration change
-        outState.putParcelableArrayList(STATE_MOVIES, mListMovies);
+//        outState.putParcelableArrayList(STATE_MOVIES, mListMovies);
     }
 
     private void handleVolleyError(VolleyError error) {
@@ -146,6 +143,6 @@ public class FragmentUpcoming extends Fragment implements SortListener, Upcoming
 
     @Override
     public void onUpcomingMoviesLoaded(ArrayList<Movie> listMovies) {
-        mAdapter.setMovies(listMovies);
+//        mAdapter.setQuestions(listMovies);
     }
 }

@@ -19,17 +19,13 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 
-import java.util.ArrayList;
-
 import in.co.techm.adapters.AdapterMovies;
 import in.co.techm.callbacks.QuestionsLoadedListener;
-import in.co.techm.database.DBQuestions;
 import in.co.techm.extras.MovieSorter;
 import in.co.techm.extras.SortListener;
 import in.co.techm.logging.L;
-import in.co.techm.pharmeasy.MyApplication;
 import in.co.techm.pharmeasy.R;
-import in.co.techm.pojo.Movie;
+import in.co.techm.pojo.response.ListQuestion;
 import in.co.techm.task.TaskLoadQuestions;
 
 /**
@@ -40,9 +36,8 @@ import in.co.techm.task.TaskLoadQuestions;
 public class FragmentBoxOffice extends Fragment implements SortListener, QuestionsLoadedListener, SwipeRefreshLayout.OnRefreshListener {
 
     //The key used to store arraylist of movie objects to and from parcelable
-    private static final String STATE_MOVIES = "state_movies";
-    //the arraylist containing our list of box office his
-    private ArrayList<Movie> mListMovies = new ArrayList<>();
+    private static final String STATE_QUESTIONS = "state_movies";
+    private ListQuestion mQuestions;
     //the adapter responsible for displaying our movies within a RecyclerView
     private AdapterMovies mAdapter;
 
@@ -95,18 +90,18 @@ public class FragmentBoxOffice extends Fragment implements SortListener, Questio
 
         if (savedInstanceState != null) {
             //if this fragment starts after a rotation or configuration change, load the existing movies from a parcelable
-            mListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
+            mQuestions = savedInstanceState.getParcelable(STATE_QUESTIONS);
         } else {
             //if this fragment starts for the first time, load the list of movies from a database
-            mListMovies = MyApplication.getWritableDatabase().readMovies(DBQuestions.TABLE_QUESTIONS);
+//            mListMovies = MyApplication.getWritableDatabase().readMovies(DBQuestions.TABLE_QUESTIONS);
             //if the database is empty, trigger an AsycnTask to download movie list from the web
-            if (mListMovies.isEmpty()) {
+            if (mQuestions == null) {
                 L.m("FragmentBoxOffice: executing task from fragment");
                 new TaskLoadQuestions(this).execute();
             }
         }
         //update your Adapter to containg the retrieved movies
-        mAdapter.setMovies(mListMovies);
+        mAdapter.setQuestions(mQuestions);
         return layout;
     }
 
@@ -115,7 +110,7 @@ public class FragmentBoxOffice extends Fragment implements SortListener, Questio
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         //save the movie list to a parcelable prior to rotation or configuration change
-        outState.putParcelableArrayList(STATE_MOVIES, mListMovies);
+        outState.putParcelable(STATE_QUESTIONS, mQuestions);
     }
 
 
@@ -145,7 +140,7 @@ public class FragmentBoxOffice extends Fragment implements SortListener, Questio
      */
     @Override
     public void onSortByName() {
-        mSorter.sortMoviesByName(mListMovies);
+//        mSorter.sortMoviesByName(mQuestions);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -154,7 +149,7 @@ public class FragmentBoxOffice extends Fragment implements SortListener, Questio
      */
     @Override
     public void onSortByDate() {
-        mSorter.sortMoviesByDate(mListMovies);
+//        mSorter.sortMoviesByDate(mQuestions);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -163,7 +158,7 @@ public class FragmentBoxOffice extends Fragment implements SortListener, Questio
      */
     @Override
     public void onSortByRating() {
-        mSorter.sortMoviesByRating(mListMovies);
+//        mSorter.sortMoviesByRating(mQuestions);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -171,13 +166,13 @@ public class FragmentBoxOffice extends Fragment implements SortListener, Questio
      * Called when the AsyncTask finishes load the list of movies from the web
      */
     @Override
-    public void onQuestionsLoaded(ArrayList<Movie> listMovies) {
+    public void onQuestionsLoaded(ListQuestion listQuestion) {
         L.m("FragmentBoxOffice: onQuestionsLoaded Fragment");
         //update the Adapter to contain the new movies downloaded from the web
         if (mSwipeRefreshLayout.isRefreshing()) {
             mSwipeRefreshLayout.setRefreshing(false);
         }
-        mAdapter.setMovies(listMovies);
+        mAdapter.setQuestions(listQuestion);
     }
 
     @Override

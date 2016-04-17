@@ -14,22 +14,21 @@ import com.android.volley.toolbox.ImageLoader;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import in.co.techm.anim.AnimationUtils;
 import in.co.techm.extras.Constants;
 import in.co.techm.pharmeasy.R;
 import in.co.techm.network.VolleySingleton;
-import in.co.techm.pojo.Movie;
+import in.co.techm.pojo.response.ListQuestion;
+import in.co.techm.pojo.response.Question;
 
 /**
  * Created by Windows on 12-02-2015.
  */
 public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.ViewHolderBoxOffice> {
 
-    //contains the list of movies
-    private ArrayList<Movie> mListMovies = new ArrayList<>();
+    private ListQuestion mListQuestions;
     private LayoutInflater mInflater;
     private VolleySingleton mVolleySingleton;
     private ImageLoader mImageLoader;
@@ -45,8 +44,8 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.ViewHolder
         mImageLoader = mVolleySingleton.getImageLoader();
     }
 
-    public void setMovies(ArrayList<Movie> listMovies) {
-        this.mListMovies = listMovies;
+    public void setQuestions(ListQuestion listQuestion) {
+        this.mListQuestions = listQuestion;
         //update the adapter to reflect the new set of movies
         notifyDataSetChanged();
     }
@@ -60,12 +59,12 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolderBoxOffice holder, int position) {
-        Movie currentMovie = mListMovies.get(position);
+        Question question = mListQuestions.getItems()[position];
         //one or more fields of the Movie object may be null since they are fetched from the web
-        holder.movieTitle.setText(currentMovie.getTitle());
+        holder.movieTitle.setText(question.getTitle());
 
         //retrieved date may be null
-        Date movieReleaseDate = currentMovie.getReleaseDateTheater();
+        Date movieReleaseDate = new Date(question.getCreation_date());
         if (movieReleaseDate != null) {
             String formattedDate = mFormatter.format(movieReleaseDate);
             holder.movieReleaseDate.setText(formattedDate);
@@ -73,7 +72,7 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.ViewHolder
             holder.movieReleaseDate.setText(Constants.NA);
         }
 
-        int audienceScore = currentMovie.getAudienceScore();
+        int audienceScore = question.getScore();
         if (audienceScore == -1) {
             holder.movieAudienceScore.setRating(0.0F);
             holder.movieAudienceScore.setAlpha(0.5F);
@@ -95,7 +94,7 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.ViewHolder
         }
         mPreviousPosition = position;
 
-        String urlThumnail = currentMovie.getUrlThumbnail();
+        String urlThumnail = question.getOwner().getProfile_image();
         loadImages(urlThumnail, holder);
 
     }
@@ -119,7 +118,12 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.ViewHolder
 
     @Override
     public int getItemCount() {
-        return mListMovies.size();
+        if(mListQuestions == null || mListQuestions.getItems() == null){
+            return  0;
+        }else {
+            return mListQuestions.getItems().length;
+        }
+
     }
 
     static class ViewHolderBoxOffice extends RecyclerView.ViewHolder {

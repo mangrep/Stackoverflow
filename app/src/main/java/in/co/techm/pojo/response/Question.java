@@ -1,23 +1,50 @@
 package in.co.techm.pojo.response;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Date;
 
 /**
  * Created by turing on 17/4/16.
  */
-public class Questions {
+public class Question implements Parcelable {
     private String [] tags;
     private Person owner;
     private boolean is_answered;
     private int view_count;
     private int answer_count;
     private int score;
-    private Date last_activity_date;
-    private Date creation_date;
+    private long last_activity_date;
+    private long creation_date;
     private String question_id;
     private String link;
     private String title;
+
+    protected Question(Parcel in) {
+        tags = in.createStringArray();
+        owner = in.readParcelable(Person.class.getClassLoader());
+        is_answered = in.readByte() != 0;
+        view_count = in.readInt();
+        answer_count = in.readInt();
+        score = in.readInt();
+        question_id = in.readString();
+        link = in.readString();
+        title = in.readString();
+    }
+
+    public static final Creator<Question> CREATOR = new Creator<Question>() {
+        @Override
+        public Question createFromParcel(Parcel in) {
+            return new Question(in);
+        }
+
+        @Override
+        public Question[] newArray(int size) {
+            return new Question[size];
+        }
+    };
 
     public String[] getTags() {
         return tags;
@@ -67,19 +94,19 @@ public class Questions {
         this.score = score;
     }
 
-    public Date getLast_activity_date() {
+    public long getLast_activity_date() {
         return last_activity_date;
     }
 
-    public void setLast_activity_date(Date last_activity_date) {
+    public void setLast_activity_date(long last_activity_date) {
         this.last_activity_date = last_activity_date;
     }
 
-    public Date getCreation_date() {
+    public long getCreation_date() {
         return creation_date;
     }
 
-    public void setCreation_date(Date creation_date) {
+    public void setCreation_date(long creation_date) {
         this.creation_date = creation_date;
     }
 
@@ -122,5 +149,23 @@ public class Questions {
                 ", link='" + link + '\'' +
                 ", title='" + title + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringArray(tags);
+        dest.writeParcelable(owner, flags);
+        dest.writeByte((byte) (is_answered ? 1 : 0));
+        dest.writeInt(view_count);
+        dest.writeInt(answer_count);
+        dest.writeInt(score);
+        dest.writeString(question_id);
+        dest.writeString(link);
+        dest.writeString(title);
     }
 }

@@ -5,13 +5,12 @@ import java.util.ArrayList;
 import in.co.techm.callbacks.QuestionsLoadedListener;
 import in.co.techm.logging.L;
 import in.co.techm.pojo.Movie;
+import in.co.techm.pojo.response.ListQuestion;
 import in.co.techm.task.TaskLoadQuestions;
 import me.tatarka.support.job.JobParameters;
 import me.tatarka.support.job.JobService;
 
-/**
- * Created by Windows on 23-02-2015.
- */
+
 public class ServiceMoviesBoxOffice extends JobService implements QuestionsLoadedListener {
     private JobParameters jobParameters;
 
@@ -29,9 +28,8 @@ public class ServiceMoviesBoxOffice extends JobService implements QuestionsLoade
         return false;
     }
 
-
     @Override
-    public void onQuestionsLoaded(ArrayList<Movie> listMovies) {
+    public void onQuestionsLoaded(ListQuestion listQuestion) {
         L.t(this, "onQuestionsLoaded");
         jobFinished(jobParameters, false);
     }

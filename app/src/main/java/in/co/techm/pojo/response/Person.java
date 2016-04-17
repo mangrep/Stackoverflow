@@ -1,9 +1,12 @@
 package in.co.techm.pojo.response;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by turing on 17/4/16.
  */
-public class Person {
+public class Person implements Parcelable {
     private String reputation;
     private String user_id;
     private String user_type;
@@ -11,6 +14,28 @@ public class Person {
     private String profile_image;
     private String display_name;
     private String link;
+
+    protected Person(Parcel in) {
+        reputation = in.readString();
+        user_id = in.readString();
+        user_type = in.readString();
+        accept_rate = in.readString();
+        profile_image = in.readString();
+        display_name = in.readString();
+        link = in.readString();
+    }
+
+    public static final Creator<Person> CREATOR = new Creator<Person>() {
+        @Override
+        public Person createFromParcel(Parcel in) {
+            return new Person(in);
+        }
+
+        @Override
+        public Person[] newArray(int size) {
+            return new Person[size];
+        }
+    };
 
     public String getReputation() {
         return reputation;
@@ -79,5 +104,21 @@ public class Person {
                 ", display_name='" + display_name + '\'' +
                 ", link='" + link + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(reputation);
+        dest.writeString(user_id);
+        dest.writeString(user_type);
+        dest.writeString(accept_rate);
+        dest.writeString(profile_image);
+        dest.writeString(display_name);
+        dest.writeString(link);
     }
 }

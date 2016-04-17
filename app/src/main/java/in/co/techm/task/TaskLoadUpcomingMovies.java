@@ -31,8 +31,9 @@ public class TaskLoadUpcomingMovies extends AsyncTask<Void, Void, ArrayList<Movi
     @Override
     protected ArrayList<Movie> doInBackground(Void... params) {
 
-        ArrayList<Movie> listMovies = QuestionUtils.loadUpcomingMovies(requestQueue);
-        return listMovies;
+//        ArrayList<Movie> listMovies = QuestionUtils.loadUpcomingMovies(requestQueue);
+//        return listMovies;
+        return new ArrayList<>();
     }
 
     @Override
