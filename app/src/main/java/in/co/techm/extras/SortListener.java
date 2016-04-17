@@ -5,7 +5,7 @@ package in.co.techm.extras;
  */
 public interface SortListener {
 
-    public void onSortByName();
-    public void onSortByDate();
+    public void sortQuestionBYViewCount();
+    public void onSortByCreationDate();
     public void onSortByRating();
 }

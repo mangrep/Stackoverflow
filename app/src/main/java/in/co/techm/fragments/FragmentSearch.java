@@ -57,12 +57,12 @@ public class FragmentSearch extends Fragment implements SortListener{
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-    public void onSortByName(){
+    public void sortQuestionBYViewCount(){
         L.t(getActivity(), "sort name search");
     }
 
     @Override
-    public void onSortByDate() {
+    public void onSortByCreationDate() {
 
     }
 

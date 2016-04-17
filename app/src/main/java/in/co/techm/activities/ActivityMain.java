@@ -22,9 +22,8 @@ import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
-import in.co.techm.anim.AnimationUtils;
 import in.co.techm.extras.SortListener;
-import in.co.techm.fragments.FragmentBoxOffice;
+import in.co.techm.fragments.FragmentStackoverflowQuestion;
 import in.co.techm.fragments.FragmentDrawer;
 import in.co.techm.fragments.FragmentUpcoming;
 import in.co.techm.logging.L;
@@ -237,12 +236,12 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
         if (fragment instanceof SortListener) {
 
             if (v.getTag().equals(TAG_SORT_CREATION_DATE)) {
-                //call the sort by name method on any Fragment that implements sortlistener
-                ((SortListener) fragment).onSortByName();
+                //call the sort by view count method on any Fragment that implements sortlistener
+                ((SortListener) fragment).sortQuestionBYViewCount();
             }
             if (v.getTag().equals(TAG_SORT_VOTES)) {
-                //call the sort by date method on any Fragment that implements sortlistener
-                ((SortListener) fragment).onSortByDate();
+                //call the sort by creation date method on any Fragment that implements sortlistener
+                ((SortListener) fragment).onSortByCreationDate();
             }
             if (v.getTag().equals(TAG_SORT_VIEW_COUNT)) {
                 //call the sort by ratings method on any Fragment that implements sortlistener
@@ -284,7 +283,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
 //            L.m("getItem called for " + num);
             switch (num) {
                 case TAB_QUESTION_LIST:
-                    fragment = FragmentBoxOffice.newInstance("", "");
+                    fragment = FragmentStackoverflowQuestion.newInstance("", "");
                     break;
                 case TAB_LIKES:
                     fragment = FragmentUpcoming.newInstance("", "");
