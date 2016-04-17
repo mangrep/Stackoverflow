@@ -1,11 +1,8 @@
 package in.co.techm.json;
 
-import in.co.techm.pharmeasy.MyApplication;
-
-import static in.co.techm.extras.UrlEndpoints.URL_LIST_QUESTIONS;
 import static in.co.techm.extras.UrlEndpoints.URL_CHAR_AMEPERSAND;
 import static in.co.techm.extras.UrlEndpoints.URL_CHAR_QUESTION;
-import static in.co.techm.extras.UrlEndpoints.URL_PARAM_API_KEY;
+import static in.co.techm.extras.UrlEndpoints.URL_LIST_QUESTIONS;
 import static in.co.techm.extras.UrlEndpoints.URL_PARAM_LIMIT;
 import static in.co.techm.extras.UrlEndpoints.URL_UPCOMING;
 

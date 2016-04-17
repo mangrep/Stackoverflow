@@ -25,7 +25,7 @@ public class Requestor {
 
         requestQueue.add(request);
         try {
-            response = requestFuture.get(30000, TimeUnit.MILLISECONDS);
+            response = requestFuture.get(3000000, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
             L.m(e + "");
         } catch (ExecutionException e) {
