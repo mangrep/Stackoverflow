@@ -23,10 +23,7 @@ import in.co.techm.network.VolleySingleton;
 import in.co.techm.pojo.response.ListQuestion;
 import in.co.techm.pojo.response.Question;
 
-/**
- * Created by Windows on 12-02-2015.
- */
-public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.ViewHolderBoxOffice> {
+public class AdapterQuestions extends RecyclerView.Adapter<AdapterQuestions.ViewHolderBoxOffice> {
 
     private ListQuestion mListQuestions;
     private LayoutInflater mInflater;
@@ -38,7 +35,7 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.ViewHolder
     private int mPreviousPosition = 0;
 
 
-    public AdapterMovies(Context context) {
+    public AdapterQuestions(Context context) {
         mInflater = LayoutInflater.from(context);
         mVolleySingleton = VolleySingleton.getInstance();
         mImageLoader = mVolleySingleton.getImageLoader();

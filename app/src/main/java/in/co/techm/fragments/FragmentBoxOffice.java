@@ -19,7 +19,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 
-import in.co.techm.adapters.AdapterMovies;
+import in.co.techm.adapters.AdapterQuestions;
 import in.co.techm.callbacks.QuestionsLoadedListener;
 import in.co.techm.extras.MovieSorter;
 import in.co.techm.extras.SortListener;
@@ -39,7 +39,7 @@ public class FragmentBoxOffice extends Fragment implements SortListener, Questio
     private static final String STATE_QUESTIONS = "state_movies";
     private ListQuestion mQuestions;
     //the adapter responsible for displaying our movies within a RecyclerView
-    private AdapterMovies mAdapter;
+    private AdapterQuestions mAdapter;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     //the recyclerview containing showing all our movies
@@ -85,7 +85,7 @@ public class FragmentBoxOffice extends Fragment implements SortListener, Questio
         mRecyclerMovies = (RecyclerView) layout.findViewById(R.id.listMovieHits);
         //set the layout manager before trying to display data
         mRecyclerMovies.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new AdapterMovies(getActivity());
+        mAdapter = new AdapterQuestions(getActivity());
         mRecyclerMovies.setAdapter(mAdapter);
 
         if (savedInstanceState != null) {
