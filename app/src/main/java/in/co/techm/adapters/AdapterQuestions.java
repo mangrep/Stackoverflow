@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -18,12 +17,12 @@ import java.util.Date;
 
 import in.co.techm.anim.AnimationUtils;
 import in.co.techm.extras.Constants;
-import in.co.techm.pharmeasy.R;
 import in.co.techm.network.VolleySingleton;
+import in.co.techm.pharmeasy.R;
 import in.co.techm.pojo.response.ListQuestion;
 import in.co.techm.pojo.response.Question;
 
-public class AdapterQuestions extends RecyclerView.Adapter<AdapterQuestions.ViewHolderBoxOffice> {
+public class AdapterQuestions extends RecyclerView.Adapter<AdapterQuestions.ViewHolderQuestions> {
 
     private ListQuestion mListQuestions;
     private LayoutInflater mInflater;
@@ -48,35 +47,32 @@ public class AdapterQuestions extends RecyclerView.Adapter<AdapterQuestions.View
     }
 
     @Override
-    public ViewHolderBoxOffice onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolderQuestions onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.custom_movie_box_office, parent, false);
-        ViewHolderBoxOffice viewHolder = new ViewHolderBoxOffice(view);
+        ViewHolderQuestions viewHolder = new ViewHolderQuestions(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolderBoxOffice holder, int position) {
+    public void onBindViewHolder(ViewHolderQuestions holder, int position) {
         Question question = mListQuestions.getItems()[position];
         //one or more fields of the Movie object may be null since they are fetched from the web
-        holder.movieTitle.setText(question.getTitle());
+        holder.questionTxt.setText(question.getTitle());
+        holder.name.setText(question.getOwner().getDisplay_name());
+        holder.tags.setText(question.getTags().toString());
+
 
         //retrieved date may be null
-        Date movieReleaseDate = new Date(question.getCreation_date());
-        if (movieReleaseDate != null) {
-            String formattedDate = mFormatter.format(movieReleaseDate);
-            holder.movieReleaseDate.setText(formattedDate);
-        } else {
-            holder.movieReleaseDate.setText(Constants.NA);
-        }
+        Date creationDate = new Date(question.getCreation_date());
+        Date now = new Date();
 
-        int audienceScore = question.getScore();
-        if (audienceScore == -1) {
-            holder.movieAudienceScore.setRating(0.0F);
-            holder.movieAudienceScore.setAlpha(0.5F);
-        } else {
-            holder.movieAudienceScore.setRating(audienceScore / 20.0F);
-            holder.movieAudienceScore.setAlpha(1.0F);
-        }
+        long diff = now.getTime() - creationDate.getTime();
+
+        long diffSeconds = diff / 1000 % 60;
+        long diffMinutes = diff / (60 * 1000) % 60;
+        long diffHours = diff / (60 * 60 * 1000) % 24;
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+        holder.time.setText(diffMinutes + " minutes back");
 
         if (position > mPreviousPosition) {
             AnimationUtils.animateSunblind(holder, true);
@@ -97,12 +93,12 @@ public class AdapterQuestions extends RecyclerView.Adapter<AdapterQuestions.View
     }
 
 
-    private void loadImages(String urlThumbnail, final ViewHolderBoxOffice holder) {
+    private void loadImages(String urlThumbnail, final ViewHolderQuestions holder) {
         if (!urlThumbnail.equals(Constants.NA)) {
             mImageLoader.get(urlThumbnail, new ImageLoader.ImageListener() {
                 @Override
                 public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
-                    holder.movieThumbnail.setImageBitmap(response.getBitmap());
+                    holder.profileThumbnail.setImageBitmap(response.getBitmap());
                 }
 
                 @Override
@@ -115,27 +111,29 @@ public class AdapterQuestions extends RecyclerView.Adapter<AdapterQuestions.View
 
     @Override
     public int getItemCount() {
-        if(mListQuestions == null || mListQuestions.getItems() == null){
-            return  0;
-        }else {
+        if (mListQuestions == null || mListQuestions.getItems() == null) {
+            return 0;
+        } else {
             return mListQuestions.getItems().length;
         }
 
     }
 
-    static class ViewHolderBoxOffice extends RecyclerView.ViewHolder {
+    static class ViewHolderQuestions extends RecyclerView.ViewHolder {
 
-        ImageView movieThumbnail;
-        TextView movieTitle;
-        TextView movieReleaseDate;
-        RatingBar movieAudienceScore;
+        ImageView profileThumbnail;
+        TextView questionTxt;
+        TextView tags;
+        TextView name;
+        TextView time;
 
-        public ViewHolderBoxOffice(View itemView) {
+        public ViewHolderQuestions(View itemView) {
             super(itemView);
-            movieThumbnail = (ImageView) itemView.findViewById(R.id.movieThumbnail);
-            movieTitle = (TextView) itemView.findViewById(R.id.movieTitle);
-            movieReleaseDate = (TextView) itemView.findViewById(R.id.movieReleaseDate);
-            movieAudienceScore = (RatingBar) itemView.findViewById(R.id.movieAudienceScore);
+            profileThumbnail = (ImageView) itemView.findViewById(R.id.profileThumbnail);
+            questionTxt = (TextView) itemView.findViewById(R.id.questionTxt);
+            tags = (TextView) itemView.findViewById(R.id.tags);
+            name = (TextView) itemView.findViewById(R.id.name);
+            time = (TextView) itemView.findViewById(R.id.time);
         }
     }
 }

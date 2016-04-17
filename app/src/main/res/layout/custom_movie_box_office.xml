@@ -8,43 +8,137 @@
     android:paddingRight="@dimen/size_word"
     android:paddingTop="@dimen/size_byte">
 
-    <ImageView
-        android:id="@+id/movieThumbnail"
-        android:layout_width="@dimen/movie_thumbnail_width"
-        android:layout_height="@dimen/movie_thumbnail_height"
-        android:layout_centerVertical="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="4">
 
-    <TextView
-        android:id="@+id/movieTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/movieThumbnail"
-        android:layout_marginLeft="56dp"
-        android:alpha="0.87"
-        android:gravity="right"
-        android:padding="@dimen/size_half_byte"
-        android:textSize="@dimen/size_text_primary" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/size_byte"
+            android:paddingLeft="@dimen/size_word"
+            android:paddingRight="@dimen/size_word"
+            android:paddingTop="@dimen/size_byte"
+            android:weightSum="1">
 
-    <TextView
-        android:id="@+id/movieReleaseDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/movieTitle"
-        android:alpha="0.87"
-        android:padding="@dimen/size_half_byte"
-        android:textSize="@dimen/size_text_secondary" />
+            <ImageView
+                android:id="@+id/profileThumbnail"
+                android:layout_width="@dimen/movie_thumbnail_width"
+                android:layout_height="@dimen/movie_thumbnail_height"
+                android:layout_centerVertical="true" />
 
-    <RatingBar
-        android:id="@+id/movieAudienceScore"
-        style="@android:style/Widget.Holo.RatingBar.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/movieReleaseDate"
-        android:isIndicator="true"
-        android:max="5"
-        android:numStars="0" />
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profileThumbnail" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/size_byte"
+                android:paddingRight="@dimen/size_word"
+                android:paddingTop="@dimen/size_byte">
+
+                <TextView
+                    android:id="@+id/questionTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:alpha="0.87"
+                    android:gravity="right"
+                    android:maxLines="1"
+                    android:padding="@dimen/size_half_byte"
+                    android:textSize="@dimen/size_text_primary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <ImageView
+                    android:id="@+id/tagsThumbnail"
+                    android:layout_width="@dimen/like_thumbnail_width"
+                    android:layout_height="@dimen/like_thumbnail_hight"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:src="@drawable/tag" />
+
+                <TextView
+                    android:id="@+id/tags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignRight="@+id/tagsThumbnail"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="4"
+                    android:alpha="0.87"
+                    android:gravity="right"
+                    android:maxLines="1"
+                    android:padding="@dimen/size_half_byte"
+                    android:textSize="@dimen/size_text_primary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/size_byte"
+                android:paddingLeft="@dimen/size_word"
+                android:paddingRight="@dimen/size_word"
+                android:paddingTop="@dimen/size_byte"
+                android:weightSum="5">
+
+                <ImageView
+                    android:id="@+id/likeThumbnail"
+                    android:layout_width="@dimen/like_thumbnail_width"
+                    android:layout_height="@dimen/like_thumbnail_hight"
+                    android:layout_weight="1"
+                    android:src="@drawable/social" />
+
+                <ImageView
+                    android:id="@+id/shareThumbnail"
+                    android:layout_width="@dimen/link_thumbnail_width"
+                    android:layout_height="@dimen/link_thumbnail_hight"
+                    android:layout_weight="1"
+                    android:src="@drawable/link" />
+
+                <ImageView
+                    android:id="@+id/upvotesThumbnail"
+                    android:layout_width="@dimen/link_thumbnail_width"
+                    android:layout_height="@dimen/link_thumbnail_hight"
+                    android:layout_weight="1"
+                    android:src="@drawable/link" />
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="2"
+                    android:gravity="right" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

@@ -10,8 +10,13 @@ import in.co.techm.pojo.response.ListQuestion;
 
 public class Parser {
     public static ListQuestion parseJSON(JSONObject response) {
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
-        return gson.fromJson(response.toString(), ListQuestion.class);
+        if (response != null) {
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
+            return gson.fromJson(response.toString(), ListQuestion.class);
+        } else {
+            return null;
+        }
+
     }
 
 
