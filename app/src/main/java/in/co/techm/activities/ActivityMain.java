@@ -6,10 +6,13 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -191,6 +194,15 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present. 
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        // searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("CLIKCED", "clikced");
+            }
+        });
         return true;
     }
 
@@ -203,8 +215,8 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement 
-        if (id == R.id.action_settings) {
-            L.m("Settings selected");
+        if (id == R.id.action_search) {
+            L.m("action_search yyyyyyyyyyyyyyyyyyy");
             return true;
         }
         return super.onOptionsItemSelected(item);
