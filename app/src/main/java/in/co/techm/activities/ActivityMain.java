@@ -1,6 +1,7 @@
 package in.co.techm.activities;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -197,28 +198,13 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
 
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
         // searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("CLIKCED", "clikced");
-            }
-        });
+        searchView.setOnSearchClickListener(this);
         return true;
     }
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will 
-        // automatically handle clicks on the Home/Up button, so long 
-        // as you specify a parent activity in AndroidManifest.xml. 
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement 
-        if (id == R.id.action_search) {
-            L.m("action_search yyyyyyyyyyyyyyyyyyy");
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -239,22 +225,28 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
 
     @Override
     public void onClick(View v) {
-        //call instantiate item since getItem may return null depending on whether the PagerAdapter is of type FragmentPagerAdapter or FragmentStatePagerAdapter
-        Fragment fragment = (Fragment) mAdapter.instantiateItem(mPager, mPager.getCurrentItem());
-        if (fragment instanceof SortListener) {
+        if (v.getId() == R.id.action_search) {
+            Intent intent = new Intent(getApplication().getApplicationContext(), SearchActivity.class);
+            startActivity(intent);
+        } else {
+            //call instantiate item since getItem may return null depending on whether the PagerAdapter is of type FragmentPagerAdapter or FragmentStatePagerAdapter
+            Fragment fragment = (Fragment) mAdapter.instantiateItem(mPager, mPager.getCurrentItem());
+            if (fragment instanceof SortListener) {
 
-            if (v.getTag().equals(TAG_SORT_CREATION_DATE)) {
-                //call the sort by view count method on any Fragment that implements sortlistener
-                ((SortListener) fragment).sortByViewCount();
+                if (v.getTag().equals(TAG_SORT_CREATION_DATE)) {
+                    //call the sort by view count method on any Fragment that implements sortlistener
+                    ((SortListener) fragment).sortByViewCount();
+                }
+                if (v.getTag().equals(TAG_SORT_VOTES)) {
+                    //call the sort by creation date method on any Fragment that implements sortlistener
+                    ((SortListener) fragment).onSortByCreationDate();
+                }
+                if (v.getTag().equals(TAG_SORT_VIEW_COUNT)) {
+                    //call the sort by ratings method on any Fragment that implements sortlistener
+                    ((SortListener) fragment).onSortByVotes();
+                }
             }
-            if (v.getTag().equals(TAG_SORT_VOTES)) {
-                //call the sort by creation date method on any Fragment that implements sortlistener
-                ((SortListener) fragment).onSortByCreationDate();
-            }
-            if (v.getTag().equals(TAG_SORT_VIEW_COUNT)) {
-                //call the sort by ratings method on any Fragment that implements sortlistener
-                ((SortListener) fragment).onSortByVotes();
-            }
+
         }
 
     }
