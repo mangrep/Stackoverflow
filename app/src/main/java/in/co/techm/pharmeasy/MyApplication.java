@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import in.co.techm.database.DBMovies;
+import in.co.techm.database.DBQuestions;
 
 
 public class MyApplication extends Application {
@@ -13,7 +13,7 @@ public class MyApplication extends Application {
 
     private static MyApplication sInstance;
 
-    private static DBMovies mDatabase;
+    private static DBQuestions mDatabase;
 
     public static MyApplication getInstance() {
         return sInstance;
@@ -23,9 +23,9 @@ public class MyApplication extends Application {
         return sInstance.getApplicationContext();
     }
 
-    public synchronized static DBMovies getWritableDatabase() {
+    public synchronized static DBQuestions getWritableDatabase() {
         if (mDatabase == null) {
-            mDatabase = new DBMovies(getAppContext());
+            mDatabase = new DBQuestions(getAppContext());
         }
         return mDatabase;
     }
@@ -34,7 +34,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
-        mDatabase = new DBMovies(this);
+        mDatabase = new DBQuestions(this);
     }
 
     public static void saveToPreferences(Context context, String preferenceName, String preferenceValue) {

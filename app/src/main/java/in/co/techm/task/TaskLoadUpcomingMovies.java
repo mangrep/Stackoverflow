@@ -7,7 +7,7 @@ import com.android.volley.RequestQueue;
 import java.util.ArrayList;
 
 import in.co.techm.callbacks.UpcomingMoviesLoadedListener;
-import in.co.techm.extras.MovieUtils;
+import in.co.techm.extras.QuestionUtils;
 import in.co.techm.network.VolleySingleton;
 import in.co.techm.pojo.Movie;
 
@@ -31,7 +31,7 @@ public class TaskLoadUpcomingMovies extends AsyncTask<Void, Void, ArrayList<Movi
     @Override
     protected ArrayList<Movie> doInBackground(Void... params) {
 
-        ArrayList<Movie> listMovies = MovieUtils.loadUpcomingMovies(requestQueue);
+        ArrayList<Movie> listMovies = QuestionUtils.loadUpcomingMovies(requestQueue);
         return listMovies;
     }
 

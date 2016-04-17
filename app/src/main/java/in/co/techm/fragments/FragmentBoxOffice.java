@@ -22,22 +22,22 @@ import com.android.volley.VolleyError;
 import java.util.ArrayList;
 
 import in.co.techm.adapters.AdapterMovies;
-import in.co.techm.callbacks.BoxOfficeMoviesLoadedListener;
-import in.co.techm.database.DBMovies;
+import in.co.techm.callbacks.QuestionsLoadedListener;
+import in.co.techm.database.DBQuestions;
 import in.co.techm.extras.MovieSorter;
 import in.co.techm.extras.SortListener;
 import in.co.techm.logging.L;
 import in.co.techm.pharmeasy.MyApplication;
 import in.co.techm.pharmeasy.R;
 import in.co.techm.pojo.Movie;
-import in.co.techm.task.TaskLoadMoviesBoxOffice;
+import in.co.techm.task.TaskLoadQuestions;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentBoxOffice#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentBoxOffice extends Fragment implements SortListener, BoxOfficeMoviesLoadedListener, SwipeRefreshLayout.OnRefreshListener {
+public class FragmentBoxOffice extends Fragment implements SortListener, QuestionsLoadedListener, SwipeRefreshLayout.OnRefreshListener {
 
     //The key used to store arraylist of movie objects to and from parcelable
     private static final String STATE_MOVIES = "state_movies";
@@ -98,11 +98,11 @@ public class FragmentBoxOffice extends Fragment implements SortListener, BoxOffi
             mListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
         } else {
             //if this fragment starts for the first time, load the list of movies from a database
-            mListMovies = MyApplication.getWritableDatabase().readMovies(DBMovies.BOX_OFFICE);
+            mListMovies = MyApplication.getWritableDatabase().readMovies(DBQuestions.TABLE_QUESTIONS);
             //if the database is empty, trigger an AsycnTask to download movie list from the web
             if (mListMovies.isEmpty()) {
                 L.m("FragmentBoxOffice: executing task from fragment");
-                new TaskLoadMoviesBoxOffice(this).execute();
+                new TaskLoadQuestions(this).execute();
             }
         }
         //update your Adapter to containg the retrieved movies
@@ -171,8 +171,8 @@ public class FragmentBoxOffice extends Fragment implements SortListener, BoxOffi
      * Called when the AsyncTask finishes load the list of movies from the web
      */
     @Override
-    public void onBoxOfficeMoviesLoaded(ArrayList<Movie> listMovies) {
-        L.m("FragmentBoxOffice: onBoxOfficeMoviesLoaded Fragment");
+    public void onQuestionsLoaded(ArrayList<Movie> listMovies) {
+        L.m("FragmentBoxOffice: onQuestionsLoaded Fragment");
         //update the Adapter to contain the new movies downloaded from the web
         if (mSwipeRefreshLayout.isRefreshing()) {
             mSwipeRefreshLayout.setRefreshing(false);
@@ -184,7 +184,7 @@ public class FragmentBoxOffice extends Fragment implements SortListener, BoxOffi
     public void onRefresh() {
         L.t(getActivity(), "onRefresh");
         //load the whole feed again on refresh, dont try this at home :)
-        new TaskLoadMoviesBoxOffice(this).execute();
+        new TaskLoadQuestions(this).execute();
 
     }
 }

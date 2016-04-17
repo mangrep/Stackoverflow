@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 import in.co.techm.adapters.AdapterMovies;
 import in.co.techm.callbacks.UpcomingMoviesLoadedListener;
-import in.co.techm.database.DBMovies;
+import in.co.techm.database.DBQuestions;
 import in.co.techm.extras.MovieSorter;
 import in.co.techm.extras.SortListener;
 import in.co.techm.logging.L;
@@ -104,7 +104,7 @@ public class FragmentUpcoming extends Fragment implements SortListener, Upcoming
             mListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
         } else {
             //if this fragment starts for the first time, load the list of movies from a database
-            mListMovies = MyApplication.getWritableDatabase().readMovies(DBMovies.UPCOMING);
+            mListMovies = MyApplication.getWritableDatabase().readMovies(DBQuestions.UPCOMING);
             //if the database is empty, trigger an AsycnTask to download movie list from the web
             if (mListMovies.isEmpty()) {
                 L.m("FragmentUpcoming: executing task from fragment");

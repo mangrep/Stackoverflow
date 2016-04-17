@@ -12,50 +12,51 @@ import java.util.Date;
 
 import in.co.techm.logging.L;
 import in.co.techm.pojo.Movie;
+import in.co.techm.pojo.response.Questions;
 
 /**
  * Created by Windows on 25-02-2015.
  */
-public class DBMovies {
-    public static final int BOX_OFFICE = 0;
+public class DBQuestions {
+    public static final int TABLE_QUESTIONS = 0;
     public static final int UPCOMING = 1;
-    private MoviesHelper mHelper;
+    private QuestionsHelper mHelper;
     private SQLiteDatabase mDatabase;
 
-    public DBMovies(Context context) {
-        mHelper = new MoviesHelper(context);
+    public DBQuestions(Context context) {
+        mHelper = new QuestionsHelper(context);
         mDatabase = mHelper.getWritableDatabase();
     }
 
-    public void insertMovies(int table, ArrayList<Movie> listMovies, boolean clearPrevious) {
+    public void insertQuestions(int table, Questions questions, boolean clearPrevious) {
         if (clearPrevious) {
-            deleteMovies(table);
+            deleteQuestions(table);
         }
 
 
         //create a sql prepared statement
-        String sql = "INSERT INTO " + (table == BOX_OFFICE ? MoviesHelper.TABLE_BOX_OFFICE : MoviesHelper.TABLE_UPCOMING) + " VALUES (?,?,?,?,?,?,?,?,?,?);";
+        String sql = "INSERT INTO " + (table == TABLE_QUESTIONS ? QuestionsHelper.TABLE_QUESTIONS : QuestionsHelper.TABLE_UPCOMING) + " VALUES (?,?,?,?,?,?,?,?,?,?);";
         //compile the statement and start a transaction
         SQLiteStatement statement = mDatabase.compileStatement(sql);
         mDatabase.beginTransaction();
-        for (int i = 0; i < listMovies.size(); i++) {
-            Movie currentMovie = listMovies.get(i);
-            statement.clearBindings();
-            //for a given column index, simply bind the data to be put inside that index
-            statement.bindString(2, currentMovie.getTitle());
-            statement.bindLong(3, currentMovie.getReleaseDateTheater() == null ? -1 : currentMovie.getReleaseDateTheater().getTime());
-            statement.bindLong(4, currentMovie.getAudienceScore());
-            statement.bindString(5, currentMovie.getSynopsis());
-            statement.bindString(6, currentMovie.getUrlThumbnail());
-            statement.bindString(7, currentMovie.getUrlSelf());
-            statement.bindString(8, currentMovie.getUrlCast());
-            statement.bindString(9, currentMovie.getUrlReviews());
-            statement.bindString(10, currentMovie.getUrlSimilar());
-
-            statement.execute();
-        }
+//        for (int i = 0; i < questions.size(); i++) {
+//            Movie currentMovie = questions.get(i);
+//            statement.clearBindings();
+//            //for a given column index, simply bind the data to be put inside that index
+//            statement.bindString(2, currentMovie.getTitle());
+//            statement.bindLong(3, currentMovie.getReleaseDateTheater() == null ? -1 : currentMovie.getReleaseDateTheater().getTime());
+//            statement.bindLong(4, currentMovie.getAudienceScore());
+//            statement.bindString(5, currentMovie.getSynopsis());
+//            statement.bindString(6, currentMovie.getUrlThumbnail());
+//            statement.bindString(7, currentMovie.getUrlSelf());
+//            statement.bindString(8, currentMovie.getUrlCast());
+//            statement.bindString(9, currentMovie.getUrlReviews());
+//            statement.bindString(10, currentMovie.getUrlSimilar());
+//
+//            statement.execute();
+//        }
         //set the transaction as successful and end the transaction
-        L.m("inserting entries " + listMovies.size() + new Date(System.currentTimeMillis()));
+//        L.m("inserting entries " + questions.size() + new Date(System.currentTimeMillis()));
         mDatabase.setTransactionSuccessful();
         mDatabase.endTransaction();
     }
@@ -64,18 +65,18 @@ public class DBMovies {
         ArrayList<Movie> listMovies = new ArrayList<>();
 
         //get a list of columns to be retrieved, we need all of them
-        String[] columns = {MoviesHelper.COLUMN_UID,
-                MoviesHelper.COLUMN_TITLE,
-                MoviesHelper.COLUMN_RELEASE_DATE,
-                MoviesHelper.COLUMN_AUDIENCE_SCORE,
-                MoviesHelper.COLUMN_SYNOPSIS,
-                MoviesHelper.COLUMN_URL_THUMBNAIL,
-                MoviesHelper.COLUMN_URL_SELF,
-                MoviesHelper.COLUMN_URL_CAST,
-                MoviesHelper.COLUMN_URL_REVIEWS,
-                MoviesHelper.COLUMN_URL_SIMILAR
+        String[] columns = {QuestionsHelper.COLUMN_UID,
+                QuestionsHelper.COLUMN_TITLE,
+                QuestionsHelper.COLUMN_RELEASE_DATE,
+                QuestionsHelper.COLUMN_AUDIENCE_SCORE,
+                QuestionsHelper.COLUMN_SYNOPSIS,
+                QuestionsHelper.COLUMN_URL_THUMBNAIL,
+                QuestionsHelper.COLUMN_URL_SELF,
+                QuestionsHelper.COLUMN_URL_CAST,
+                QuestionsHelper.COLUMN_URL_REVIEWS,
+                QuestionsHelper.COLUMN_URL_SIMILAR
         };
-        Cursor cursor = mDatabase.query((table == BOX_OFFICE ? MoviesHelper.TABLE_BOX_OFFICE : MoviesHelper.TABLE_UPCOMING), columns, null, null, null, null, null);
+        Cursor cursor = mDatabase.query((table == TABLE_QUESTIONS ? QuestionsHelper.TABLE_QUESTIONS : QuestionsHelper.TABLE_UPCOMING), columns, null, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             L.m("loading entries " + cursor.getCount() + new Date(System.currentTimeMillis()));
             do {
@@ -84,16 +85,16 @@ public class DBMovies {
                 Movie movie = new Movie();
                 //each step is a 2 part process, find the index of the column first, find the data of that column using
                 //that index and finally set our blank movie object to contain our data
-                movie.setTitle(cursor.getString(cursor.getColumnIndex(MoviesHelper.COLUMN_TITLE)));
-                long releaseDateMilliseconds = cursor.getLong(cursor.getColumnIndex(MoviesHelper.COLUMN_RELEASE_DATE));
+                movie.setTitle(cursor.getString(cursor.getColumnIndex(QuestionsHelper.COLUMN_TITLE)));
+                long releaseDateMilliseconds = cursor.getLong(cursor.getColumnIndex(QuestionsHelper.COLUMN_RELEASE_DATE));
                 movie.setReleaseDateTheater(releaseDateMilliseconds != -1 ? new Date(releaseDateMilliseconds) : null);
-                movie.setAudienceScore(cursor.getInt(cursor.getColumnIndex(MoviesHelper.COLUMN_AUDIENCE_SCORE)));
-                movie.setSynopsis(cursor.getString(cursor.getColumnIndex(MoviesHelper.COLUMN_SYNOPSIS)));
-                movie.setUrlThumbnail(cursor.getString(cursor.getColumnIndex(MoviesHelper.COLUMN_URL_THUMBNAIL)));
-                movie.setUrlSelf(cursor.getString(cursor.getColumnIndex(MoviesHelper.COLUMN_URL_SELF)));
-                movie.setUrlCast(cursor.getString(cursor.getColumnIndex(MoviesHelper.COLUMN_URL_CAST)));
-                movie.setUrlReviews(cursor.getString(cursor.getColumnIndex(MoviesHelper.COLUMN_URL_REVIEWS)));
-                movie.setUrlSimilar(cursor.getString(cursor.getColumnIndex(MoviesHelper.COLUMN_URL_SIMILAR)));
+                movie.setAudienceScore(cursor.getInt(cursor.getColumnIndex(QuestionsHelper.COLUMN_AUDIENCE_SCORE)));
+                movie.setSynopsis(cursor.getString(cursor.getColumnIndex(QuestionsHelper.COLUMN_SYNOPSIS)));
+                movie.setUrlThumbnail(cursor.getString(cursor.getColumnIndex(QuestionsHelper.COLUMN_URL_THUMBNAIL)));
+                movie.setUrlSelf(cursor.getString(cursor.getColumnIndex(QuestionsHelper.COLUMN_URL_SELF)));
+                movie.setUrlCast(cursor.getString(cursor.getColumnIndex(QuestionsHelper.COLUMN_URL_CAST)));
+                movie.setUrlReviews(cursor.getString(cursor.getColumnIndex(QuestionsHelper.COLUMN_URL_REVIEWS)));
+                movie.setUrlSimilar(cursor.getString(cursor.getColumnIndex(QuestionsHelper.COLUMN_URL_SIMILAR)));
                 //add the movie to the list of movie objects which we plan to return
                 listMovies.add(movie);
             }
@@ -102,13 +103,13 @@ public class DBMovies {
         return listMovies;
     }
 
-    public void deleteMovies(int table) {
-        mDatabase.delete((table == BOX_OFFICE ? MoviesHelper.TABLE_BOX_OFFICE : MoviesHelper.TABLE_UPCOMING), null, null);
+    public void deleteQuestions(int table) {
+        mDatabase.delete((table == TABLE_QUESTIONS ? QuestionsHelper.TABLE_QUESTIONS : QuestionsHelper.TABLE_UPCOMING), null, null);
     }
 
-    private static class MoviesHelper extends SQLiteOpenHelper {
+    private static class QuestionsHelper extends SQLiteOpenHelper {
         public static final String TABLE_UPCOMING = " movies_upcoming";
-        public static final String TABLE_BOX_OFFICE = "movies_box_office";
+        public static final String TABLE_QUESTIONS = "stackoverflow_questions";
         public static final String COLUMN_UID = "_id";
         public static final String COLUMN_TITLE = "title";
         public static final String COLUMN_RELEASE_DATE = "release_date";
@@ -119,7 +120,7 @@ public class DBMovies {
         public static final String COLUMN_URL_CAST = "url_cast";
         public static final String COLUMN_URL_REVIEWS = "url_reviews";
         public static final String COLUMN_URL_SIMILAR = "url_similar";
-        private static final String CREATE_TABLE_BOX_OFFICE = "CREATE TABLE " + TABLE_BOX_OFFICE + " (" +
+        private static final String CREATE_TABLE_BOX_OFFICE = "CREATE TABLE " + TABLE_QUESTIONS + " (" +
                 COLUMN_UID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_TITLE + " TEXT," +
                 COLUMN_RELEASE_DATE + " INTEGER," +
@@ -143,11 +144,11 @@ public class DBMovies {
                 COLUMN_URL_REVIEWS + " TEXT," +
                 COLUMN_URL_SIMILAR + " TEXT" +
                 ");";
-        private static final String DB_NAME = "movies_db";
+        private static final String DB_NAME = "question_db";
         private static final int DB_VERSION = 1;
         private Context mContext;
 
-        public MoviesHelper(Context context) {
+        public QuestionsHelper(Context context) {
             super(context, DB_NAME, null, DB_VERSION);
             mContext = context;
         }
@@ -167,7 +168,7 @@ public class DBMovies {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             try {
                 L.m("upgrade table box office executed");
-                db.execSQL(" DROP TABLE " + TABLE_BOX_OFFICE + " IF EXISTS;");
+                db.execSQL(" DROP TABLE " + TABLE_QUESTIONS + " IF EXISTS;");
                 db.execSQL(" DROP TABLE " + TABLE_UPCOMING + " IF EXISTS;");
                 onCreate(db);
             } catch (SQLiteException exception) {
