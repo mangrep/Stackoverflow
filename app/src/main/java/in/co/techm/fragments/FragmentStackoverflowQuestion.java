@@ -99,7 +99,7 @@ public class FragmentStackoverflowQuestion extends Fragment implements SortListe
             }
         }
         //update your Adapter to containg the retrieved Questions
-        mAdapter.setQuestions(mListQuestions);
+        mAdapter.setQuestions(mListQuestions, true);
         return layout;
     }
 
@@ -184,7 +184,7 @@ public class FragmentStackoverflowQuestion extends Fragment implements SortListe
             mSwipeRefreshLayout.setRefreshing(false);
         }
         mListQuestions = listQuestion;
-        mAdapter.setQuestions(listQuestion);
+        mAdapter.setQuestions(listQuestion, true);
     }
 
     @Override

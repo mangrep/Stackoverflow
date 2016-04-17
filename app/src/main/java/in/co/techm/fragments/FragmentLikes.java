@@ -107,7 +107,7 @@ public class FragmentLikes extends Fragment implements SortListener, SearchLoade
             }
         }
         //update your Adapter to containg the retrieved Questions
-        mAdapter.setQuestions(mSearchResponse);
+        mAdapter.setQuestions(mSearchResponse, false);
         return layout;
     }
 
@@ -141,6 +141,6 @@ public class FragmentLikes extends Fragment implements SortListener, SearchLoade
 
     @Override
     public void onUpcomingMoviesLoaded(ListQuestion listQuestion) {
-        mAdapter.setQuestions(listQuestion);
+        mAdapter.setQuestions(listQuestion, false);
     }
 }

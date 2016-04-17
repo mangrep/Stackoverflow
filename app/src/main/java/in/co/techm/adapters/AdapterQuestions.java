@@ -43,8 +43,9 @@ public class AdapterQuestions extends RecyclerView.Adapter<AdapterQuestions.View
         mImageLoader = mVolleySingleton.getImageLoader();
     }
 
-    public void setQuestions(ListQuestion listQuestion) {
+    public void setQuestions(ListQuestion listQuestion, boolean showLikeButton) {
         this.mListQuestions = listQuestion;
+        this.mShowLikeButton = showLikeButton;
         //update the adapter to reflect the new set of movies
         notifyDataSetChanged();
     }
