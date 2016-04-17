@@ -14,9 +14,6 @@ import in.co.techm.logging.L;
 import in.co.techm.pojo.Movie;
 import in.co.techm.pojo.response.Question;
 
-/**
- * Created by Windows on 25-02-2015.
- */
 public class DBQuestions {
     public static final int TABLE_QUESTIONS = 0;
     public static final int UPCOMING = 1;

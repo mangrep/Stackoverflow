@@ -36,7 +36,7 @@ import in.co.techm.task.TaskLoadQuestions;
  */
 public class FragmentStackoverflowQuestion extends Fragment implements SortListener, QuestionsLoadedListener, SwipeRefreshLayout.OnRefreshListener {
 
-    //The key used to store arraylist of movie objects to and from parcelable
+    //The key used to store questions objects to and from parcelable
     private static final String STATE_QUESTIONS = "state_Questions";
     private ListQuestion mListQuestions;
     //the adapter responsible for displaying our Questions within a RecyclerView
@@ -60,7 +60,7 @@ public class FragmentStackoverflowQuestion extends Fragment implements SortListe
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentBoxOffice.
+     * @return A new instance of fragment FragmentStackoverflowQuestion
      */
     // TODO: Rename and change types and number of parameters
     public static FragmentStackoverflowQuestion newInstance(String param1, String param2) {
@@ -94,7 +94,7 @@ public class FragmentStackoverflowQuestion extends Fragment implements SortListe
 //            mListQuestions = MyApplication.getWritableDatabase().readQuestions(DBQuestions.TABLE_QUESTIONS);
             //if the database is empty, trigger an AsycnTask to download movie list from the web
             if (mListQuestions == null) {
-                L.m("FragmentBoxOffice: executing task from fragment");
+                L.m("FragmentStackoverflowQuestion: executing task from fragment");
                 new TaskLoadQuestions(this).execute();
             }
         }
@@ -178,7 +178,7 @@ public class FragmentStackoverflowQuestion extends Fragment implements SortListe
      */
     @Override
     public void onQuestionsLoaded(ListQuestion listQuestion) {
-        L.m("FragmentBoxOffice: onQuestionsLoaded Fragment");
+        L.m("FragmentStackoverflowQuestion: onQuestionsLoaded Fragment");
         //update the Adapter to contain the questions downloaded from the web
         if (mSwipeRefreshLayout.isRefreshing()) {
             mSwipeRefreshLayout.setRefreshing(false);

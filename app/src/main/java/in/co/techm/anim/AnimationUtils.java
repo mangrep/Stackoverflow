@@ -13,9 +13,6 @@ import android.view.animation.OvershootInterpolator;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
-/**
- * Created by Windows on 04-03-2015.
- */
 public class AnimationUtils {
     private static int counter = 0;
 

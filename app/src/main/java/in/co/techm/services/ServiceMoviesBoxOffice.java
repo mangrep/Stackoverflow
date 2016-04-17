@@ -1,10 +1,7 @@
 package in.co.techm.services;
 
-import java.util.ArrayList;
-
 import in.co.techm.callbacks.QuestionsLoadedListener;
 import in.co.techm.logging.L;
-import in.co.techm.pojo.Movie;
 import in.co.techm.pojo.response.ListQuestion;
 import in.co.techm.task.TaskLoadQuestions;
 import me.tatarka.support.job.JobParameters;

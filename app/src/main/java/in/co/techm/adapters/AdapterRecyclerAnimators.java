@@ -12,9 +12,7 @@ import java.util.ArrayList;
 
 import in.co.techm.pharmeasy.R;
 
-/**
- * Created by Windows on 04-03-2015.
- */
+
 public class AdapterRecyclerAnimators extends RecyclerView.Adapter<AdapterRecyclerAnimators.Holder> {
     private ArrayList<String> mListData = new ArrayList<>();
     private LayoutInflater mLayoutInflater;

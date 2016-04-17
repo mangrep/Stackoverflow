@@ -7,13 +7,9 @@ import com.android.volley.RequestQueue;
 import java.util.ArrayList;
 
 import in.co.techm.callbacks.UpcomingMoviesLoadedListener;
-import in.co.techm.extras.QuestionUtils;
 import in.co.techm.network.VolleySingleton;
 import in.co.techm.pojo.Movie;
 
-/**
- * Created by Windows on 02-03-2015.
- */
 public class TaskLoadUpcomingMovies extends AsyncTask<Void, Void, ArrayList<Movie>> {
     private UpcomingMoviesLoadedListener myComponent;
     private VolleySingleton volleySingleton;

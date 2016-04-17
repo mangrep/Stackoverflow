@@ -9,9 +9,6 @@ import in.co.techm.json.Parser;
 import in.co.techm.json.Requestor;
 import in.co.techm.pojo.response.ListQuestion;
 
-/**
- * Created by Windows on 02-03-2015.
- */
 public class QuestionUtils {
     public static ListQuestion loadStackoverflowQuestions(RequestQueue requestQueue) {
         JSONObject response = Requestor.requestQuestionsJSON(requestQueue, Endpoints.getRequestUrlListQuestions(30));
