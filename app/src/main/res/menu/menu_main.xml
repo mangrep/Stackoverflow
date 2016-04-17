@@ -5,6 +5,8 @@
         android:id="@+id/action_search"
         android:orderInCategory="200"
         android:title="Search"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:actionViewClass="android.support.v7.widget.SearchView"
         android:icon="@android:drawable/ic_menu_search"
         app:showAsAction="always"/>

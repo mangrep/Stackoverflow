@@ -28,7 +28,6 @@ import in.co.techm.extras.SortListener;
 import in.co.techm.fragments.FragmentDrawer;
 import in.co.techm.fragments.FragmentLikes;
 import in.co.techm.fragments.FragmentStackoverflowQuestion;
-import in.co.techm.logging.L;
 import in.co.techm.pharmeasy.R;
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
@@ -65,6 +64,8 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
     private FloatingActionButton mFAB;
     private FloatingActionMenu mFABMenu;
     private FragmentDrawer mDrawerFragment;
+    private SearchView mSearchView;
+    private final static int SEARCH_CODE = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,9 +197,9 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
         // Inflate the menu; this adds items to the action bar if it is present. 
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        mSearchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
         // searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setOnSearchClickListener(this);
+        mSearchView.setOnSearchClickListener(this);
         return true;
     }
 
@@ -224,10 +225,30 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SEARCH_CODE) {
+            Log.d("ONACTO", "clear focus");
+            View current = getCurrentFocus();
+            if (current != null) current.clearFocus();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        View current = getCurrentFocus();
+        if (current != null) current.clearFocus();
+    }
+
+    @Override
     public void onClick(View v) {
         if (v.getId() == R.id.action_search) {
+            mSearchView.clearFocus();
+
             Intent intent = new Intent(getApplication().getApplicationContext(), SearchActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, SEARCH_CODE);
+
         } else {
             //call instantiate item since getItem may return null depending on whether the PagerAdapter is of type FragmentPagerAdapter or FragmentStatePagerAdapter
             Fragment fragment = (Fragment) mAdapter.instantiateItem(mPager, mPager.getCurrentItem());
